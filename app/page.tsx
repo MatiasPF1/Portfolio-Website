@@ -10,10 +10,10 @@ export default function Home() {
     <div style={{ width: '100%', height: '600px', position: 'relative' }}>
   <Particles
     particleColors={['#ffffff', '#ffffff']}
-    particleCount={200}
-    particleSpread={10}
+    particleCount={300}
+    particleSpread={30}
     speed={0.1}
-    particleBaseSize={100}
+    particleBaseSize={90}
     moveParticlesOnHover={false}
     alphaParticles={false}
     disableRotation={false}
