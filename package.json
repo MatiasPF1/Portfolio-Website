@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@next/font": "^14.2.15",
     "gsap": "^3.14.2",
     "next": "16.1.1",
     "ogl": "^1.0.11",

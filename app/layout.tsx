@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
-import { Geist} from "next/font/google";
+import { Geist } from "next/font/google";
+import { Press_Start_2P } from 'next/font/google';
 import "./globals.css";
 import BackgroundVideo from "@/components/BackgroundVideo";
-
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
+const pressStart = Press_Start_2P({ 
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-press-start',
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,15 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-
     <html lang="en">
-
-      <body className={`${geistSans.variable} antialiased`} suppressHydrationWarning>
+      <body 
+        className={`${geistSans.variable} ${pressStart.variable} antialiased`} 
+        suppressHydrationWarning
+      >
         <BackgroundVideo /> {/*Integrated here for Playback throught the entire app */}
         {children}
       </body>
-
     </html>
-
   );
 }
