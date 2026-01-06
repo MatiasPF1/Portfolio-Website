@@ -22,14 +22,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+
     <html lang="en">
-      <body
-  className={`${geistSans.variable} antialiased`}
-  suppressHydrationWarning
->
+
+      <body className={`${geistSans.variable} antialiased`} suppressHydrationWarning>
         <BackgroundVideo />
         {children}
       </body>
+      
     </html>
+
   );
 }
