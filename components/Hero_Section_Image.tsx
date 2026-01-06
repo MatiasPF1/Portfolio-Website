@@ -11,8 +11,8 @@ export default function Hero_Section() {
         className="object-cover rounded-xl"
         priority
       />
-    </div>
-
-    // Left Section - Text Content  
+    </div>   
+  
+ 
   );
 }

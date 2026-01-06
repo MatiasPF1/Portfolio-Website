@@ -26,10 +26,10 @@ export default function RootLayout({
     <html lang="en">
 
       <body className={`${geistSans.variable} antialiased`} suppressHydrationWarning>
-        <BackgroundVideo />
+        <BackgroundVideo /> {/*Integrated here for Playback throught the entire app */}
         {children}
       </body>
-      
+
     </html>
 
   );
