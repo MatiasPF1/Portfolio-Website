@@ -34,7 +34,7 @@ export default function Navbar() {
 
         <li>
           <Link href="/projects" className="text-[#ccc] text-[1rem] no-underline uppercase transition-colors duration-300 relative overflow-hidden px-1.25 hover:text-white">
-            Experience 
+            Skills
           </Link>
         </li>
 

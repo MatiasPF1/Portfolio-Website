@@ -8,3 +8,8 @@ body {
   background-color: #101624;
 }
 
+
+
+p {
+  font-family: var(--font-ibm-plex-sans), sans-serif;
+}

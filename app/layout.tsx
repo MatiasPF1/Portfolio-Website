@@ -3,11 +3,21 @@ import { Geist } from "next/font/google";
 import { Press_Start_2P } from 'next/font/google';
 import "./globals.css";
 import BackgroundVideo from "@/components/BackgroundVideo";
+import { IBM_Plex_Sans } from 'next/font/google'
+
+const ibmPlexSans = IBM_Plex_Sans({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-ibm-plex-sans',
+})
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
+
 
 const pressStart = Press_Start_2P({ 
   weight: '400',
@@ -29,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body 
-        className={`${geistSans.variable} ${pressStart.variable} antialiased`} 
+        className={`${geistSans.variable} ${pressStart.variable} ${ibmPlexSans.variable} antialiased`} 
         suppressHydrationWarning
       >
         <BackgroundVideo /> {/*Integrated here for Playback throught the entire app */}

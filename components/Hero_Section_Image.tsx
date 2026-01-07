@@ -25,19 +25,19 @@ export default function Hero_Section() {
   {/* Location */}
   <CiLocationOn size={24} className="text-white" />
   <span className="text-white text-sm leading-none self-center">
-    New York Metropolitean Area
+   <b> New York Metropolitan Area</b>
   </span>
 
   {/* Education */}
   <LuGraduationCap size={24} className="text-white" />
   <span className="text-white text-sm leading-none self-center">
-    Bachelor's in computer science, 2028
+     <b>Bachelor's of Science in Computer Science, 2028</b>
   </span>
 
   {/* Work */}
   <MdWorkOutline size={24} className="text-white" />
   <span className="text-white text-sm leading-none self-center">
-    DL Research Assistant at Advanced Quantumn Materials Lab
+    <b>DL Research Assistant at Advanced Quantum Materials Lab</b>
   </span>
 </div>
      
