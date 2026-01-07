@@ -28,19 +28,40 @@ export default function Hero_Section_Text() {
       </p>
 
 
-    <p className="text-lg md:text-xl text-slate-100 leading-relaxed font-medium max-w-xl mt-17">
+    <p className="text-lg md:text-xl text-slate-100 leading-relaxed font-medium max-w-xl mt-6">
         Regarding my campus involvement and leadership, I am a member of the{" "}
         <span className="text-[#a6b6e4db] font-bold">Advanced Quantum Materials Lab</span>.
-  
-  I serve on the{" "}
-  <span className="text-[#a6b6e4db] font-bold">E-Board of Stevens ColorStack {" "}</span> .
-
-  
-  I previously served as a{" "}
-  <span className="text-[#a6b6e4db] font-bold">Tutor–Counselor–Resident Assistant for STEP</span>, supporting{" "}
-  50+ students through advising, tutoring, and supervision.
-</p>
+        I serve on the{" "}
+        <span className="text-[#a6b6e4db] font-bold">E-Board of Stevens ColorStack {" "}</span> .
+        I previously served as a{" "}
+        <span className="text-[#a6b6e4db] font-bold">Tutor–Counselor–Resident Assistant for STEP</span>, supporting{" "}
+        50+ students through mentoring, tutoring in calculus/physics , and residential life supervision.
+    </p>
     </div>
+
+                                    {/*Buttons for Contact me and Cv*/}
+    <div className="flex gap-6 mt-10 ml-28">
+
+    <a 
+      href="mailto:matiaspfreire@gmail.com"
+      className="px-6 py-3 rounded-lg bg-[#a6b6e4] text-[#101624] font-semibold 
+               transition-all duration-200 ease-out
+               hover:bg-[#92a6de] hover:scale-105 hover:shadow-lg">
+              Contact Me
+    </a>
+
+    <a
+    href="/MatiasFreire_Resume.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="px-6 py-3 rounded-lg border border-[#a6b6e4] text-[#a6b6e4]
+               transition-all duration-200 ease-out
+               hover:bg-[#a6b6e4]/10 hover:scale-105 hover:shadow-lg">
+               Resume
+  </a>
+
+</div>
+
 
     </div>
   );
