@@ -1,7 +1,8 @@
 import Navbar from "@/components/navbar";
 import Hero_Section from "@/components/Hero_Section_Image";
 import Hero_Section_Text from "@/components/Hero_Section_Text";
-
+import Skill_Section from "@/components/skills";
+import About_Me from "@/components/AboutMe";
 
 
 export default function Home() {
@@ -10,6 +11,8 @@ export default function Home() {
       <Navbar />
       <Hero_Section />
       <Hero_Section_Text />
+      <Skill_Section />
+      <About_Me />
 
     </main>
   );

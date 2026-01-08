@@ -19,8 +19,16 @@ export default function Navbar() {
       {/* Navigation Links (center/right) */}
       <ul className="flex gap-12.5 list-none m-0 pr-8 ">
         <li> 
+
+        {/*Home Link */}
           <Link href="/" className="text-[#ccc] text-[1rem] no-underline uppercase transition-colors duration-300 relative overflow-hidden px-1.25 hover:text-white">
             Home
+          </Link>
+        </li>
+
+          <li>
+          <Link href="/skills" className="text-[#ccc] text-[1rem] no-underline uppercase transition-colors duration-300 relative overflow-hidden px-1.25 hover:text-white">
+            Skills
           </Link>
         </li>
 
@@ -31,13 +39,6 @@ export default function Navbar() {
             About
           </Link>
         </li>
-
-        <li>
-          <Link href="/projects" className="text-[#ccc] text-[1rem] no-underline uppercase transition-colors duration-300 relative overflow-hidden px-1.25 hover:text-white">
-            Skills
-          </Link>
-        </li>
-
 
         <li>
           <Link href="/contact" className="text-[#ccc] text-[1rem] no-underline uppercase transition-colors duration-300 relative overflow-hidden px-1.25 hover:text-white">
