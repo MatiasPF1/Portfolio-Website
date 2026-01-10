@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@custom-variant dark (&:is(.dark *));
+
+
 
 html,
 body {
@@ -8,8 +12,8 @@ body {
   background-color: #101624;
 }
 
-
-
 p {
   font-family: var(--font-ibm-plex-sans), sans-serif;
 }
+
+
