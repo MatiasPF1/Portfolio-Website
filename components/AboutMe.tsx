@@ -83,11 +83,11 @@ export default function About_Me() {
           loopDelay={2}
         />
       </div>
-      <p className="text-xl mt-4 text-center leading-relaxed pt-[1rem]"><strong>Some of the Music I enjoy</strong> </p>
+      <p className="text-xl mt-4 text-center leading-relaxed pt-[1rem]"><strong>Some of the Music I like</strong> </p>
 
       
       {/* Music Grid */}
-      <div className="grid grid-cols-4 gap-7 px-8 max-w-7xl mx-auto mb-[24rem] pt-[3rem]">
+      <div className="grid grid-cols-4 gap-10 px-8 max-w-[1500px] mx-auto mb-[24rem] pt-[3rem]">
         <div className="relative group">
           <div className="overflow-hidden rounded-lg transition-transform hover:scale-105 ">
             <img
@@ -96,7 +96,7 @@ export default function About_Me() {
               className="w-full aspect-square object-cover"
             />
           </div>
-          <p className="text-xs mt-4 text-center leading-relaxed">Malcom Todd</p>
+          <p className="text-md mt-4 text-center leading-relaxed">Malcom Todd</p>
         </div>
         
         <div className="relative group">
@@ -107,7 +107,7 @@ export default function About_Me() {
               className="w-full aspect-square object-cover"
             />
           </div>
-          <p className="text-xs mt-4 text-center leading-relaxed">Bruno Mars</p>
+          <p className="text-md mt-4 text-center leading-relaxed">Bruno Mars</p>
         </div>
         
         <div className="relative group">
@@ -118,7 +118,7 @@ export default function About_Me() {
               className="w-full aspect-square object-cover"
             />
           </div>
-          <p className="text-xs mt-4 text-center leading-relaxed">Enanitos Verdes</p>
+          <p className="text-md mt-4 text-center leading-relaxed">Enanitos Verdes</p>
         </div>
         
         <div className="relative group">
@@ -129,7 +129,7 @@ export default function About_Me() {
               className="w-full aspect-square object-cover"
             />
           </div>
-          <p className="text-xs mt-4 text-center leading-relaxed">Grent Perez</p>
+          <p className="text-md mt-4 text-center leading-relaxed">Grent Perez</p>
         </div>
         
         <div className="relative group">
@@ -140,7 +140,7 @@ export default function About_Me() {
               className="w-full aspect-square object-cover"
             />
           </div>
-          <p className="text-xs mt-4 text-center leading-relaxed">Jane Remover</p>
+          <p className="text-md mt-4 text-center leading-relaxed">Jane Remover</p>
         </div>
         
         <div className="relative group">
@@ -151,7 +151,7 @@ export default function About_Me() {
               className="w-full aspect-square object-cover"
             />
           </div>
-          <p className="text-xs mt-4 text-center leading-relaxed">Laufey</p>
+          <p className="text-md mt-4 text-center leading-relaxed">Laufey</p>
         </div>
         
         <div className="relative group">
@@ -162,7 +162,7 @@ export default function About_Me() {
               className="w-full aspect-square object-cover"
             />
           </div>
-          <p className="text-xs mt-4 text-center leading-relaxed">The Marias</p>
+          <p className="text-md mt-4 text-center leading-relaxed">The Marias</p>
         </div>
         
         <div className="relative group">
@@ -173,7 +173,7 @@ export default function About_Me() {
               className="w-full aspect-square object-cover"
             />
           </div>
-          <p className="text-xs mt-4 text-center leading-relaxed">Tame Impala</p>
+          <p className="text-md mt-4 text-center leading-relaxed">Tame Impala</p>
         </div>
       </div>
 
