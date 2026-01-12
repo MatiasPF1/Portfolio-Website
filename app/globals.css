@@ -1,8 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@custom-variant dark (&:is(.dark *));
 
 
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px; /* Offset for fixed navbar */
+}
 
 html,
 body {
@@ -15,5 +19,4 @@ body {
 p {
   font-family: var(--font-ibm-plex-sans), sans-serif;
 }
-
 

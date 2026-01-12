@@ -5,7 +5,7 @@ export default function About_Me() {
   const lifeMoments = [
     {
       image: '/First-Gen.jpeg',
-      caption: "First Generation Ecuadorean CS Student "
+      caption: "First Generation Ecuadorian CS Student "
     },
     {
       image: '/STEP.jpeg',
@@ -39,7 +39,7 @@ export default function About_Me() {
       </div>
 
       {/* A Piece Of My Life*/}
-      <div className="flex justify-center mb-8 mr-336 ">
+      <div className="flex justify-center mb-8 mr-240 ">
         <Shuffle
           text="A Piece Of My Life"
           shuffleDirection="left"
@@ -51,11 +51,11 @@ export default function About_Me() {
           loopDelay={2}
         />
       </div>
-      <p className="text-xl mt-4 text-center leading-relaxed pt-[1rem]"><strong>Some photos I love i took during my First/Second Year of College</strong> </p>
+      <p className="text-xl mt-4 text-center leading-relaxed pt-[2rem]"><strong>Some photos I love i took during my First/Second Year of College</strong> </p>
 
 
       {/* Photo Grid */}
-      <div className="grid grid-cols-4 gap-18 px-15 max-w-440 mx-auto mb-7 pt-[2rem]">
+      <div className="grid grid-cols-4 gap-18 px-15 max-w-345 mx-auto mb-7 pt-[2rem]">
         {lifeMoments.map((moment, index) => (
           <div key={index} className="relative group pt-10">
             <div className="overflow-hidden rounded-lg  transition-transform hover:scale-105 mb-5">
@@ -65,13 +65,13 @@ export default function About_Me() {
                 className="w-full aspect-square object-cover"
               />
             </div>
-            <p className="text-m mt-4 text-center leading-relaxed">{moment.caption}</p>
+            <p className="text-base mt-4 text-center leading-relaxed">{moment.caption}</p>
           </div>
         ))}
       </div>
 
       {/* Music */}
-      <div className="flex justify-center mr-408 pt-[4rem] ">
+      <div className="flex justify-center mr-308 pt-[4rem] ">
         <Shuffle
           text="Music"
           shuffleDirection="left"
@@ -83,11 +83,11 @@ export default function About_Me() {
           loopDelay={2}
         />
       </div>
-      <p className="text-xl mt-4 text-center leading-relaxed pt-[1rem]"><strong>Some of the Music I like</strong> </p>
+      <p className="text-xl mt-4 text-center leading-relaxed pt-[2rem]"><strong>Some of the Music I like</strong> </p>
 
       
       {/* Music Grid */}
-      <div className="grid grid-cols-4 gap-10 px-8 max-w-[1500px] mx-auto mb-[24rem] pt-[3rem]">
+      <div className="grid grid-cols-4 gap-10 px-8 max-w-[1000px] mx-auto mb-[24rem] pt-[3rem]">
         <div className="relative group">
           <div className="overflow-hidden rounded-lg transition-transform hover:scale-105 ">
             <img
@@ -121,6 +121,18 @@ export default function About_Me() {
           <p className="text-md mt-4 text-center leading-relaxed">Enanitos Verdes</p>
         </div>
         
+        <div className="relative group">
+          <div className="overflow-hidden rounded-lg transition-transform hover:scale-105 ">
+            <img
+              src="/Tame_Impala.jpg"
+              alt="Tame Impala"
+              className="w-full aspect-square object-cover"
+            />
+          </div>
+          <p className="text-md mt-4 text-center leading-relaxed">Tame Impala</p>
+        </div>
+
+
         <div className="relative group">
           <div className="overflow-hidden rounded-lg transition-transform hover:scale-105 ">
             <img
@@ -164,17 +176,7 @@ export default function About_Me() {
           </div>
           <p className="text-md mt-4 text-center leading-relaxed">The Marias</p>
         </div>
-        
-        <div className="relative group">
-          <div className="overflow-hidden rounded-lg transition-transform hover:scale-105 ">
-            <img
-              src="/Tame_Impala.jpg"
-              alt="Tame Impala"
-              className="w-full aspect-square object-cover"
-            />
-          </div>
-          <p className="text-md mt-4 text-center leading-relaxed">Tame Impala</p>
-        </div>
+     
       </div>
 
     </section>

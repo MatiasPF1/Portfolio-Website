@@ -9,38 +9,40 @@ import { MdWorkOutline } from "react-icons/md"; // Work Outline Icon
 
 export default function Hero_Section() {
   return (
-    <div className="relative h-105 w-88 ml-290 mt-50 rounded-3xl shadow-sm">
-      <Image
-        src="/Matias.jpeg"
-        alt="Hero Image"
-        fill
-        className="object-cover rounded-xl"
-        priority
-      />
+    <div className="flex flex-col items-start shrink-0 ml-9">
+      {/* Image Container */}
+      <div className="relative h-[380px] w-[310px] rounded-xl shadow-lg">
+        <Image
+          src="/Matias.jpeg"
+          alt="Hero Image"
+          fill
+          className="object-cover rounded-xl"
+          priority
+        />
+      </div>
 
-  {/* Status of Hero */}
-<div className="absolute left-6 bottom-6 translate-y-46 z-10 grid grid-cols-[auto_1fr] gap-x-4 gap-y-6  py-4  ">
+      {/* Status of Hero */}
+      <div className="mt-3 ml-8 grid grid-cols-[auto_1fr] gap-x-2 gap-y-3 py-2">
 
 
   {/* Location */}
-  <CiLocationOn size={24} className="text-white" />
-  <span className="text-white text-sm leading-none self-center">
+  <CiLocationOn size={18} className="text-white self-center" />
+  <span className="text-white text-xs leading-tight self-center">
    <b> New York Metropolitan Area</b>
   </span>
 
   {/* Education */}
-  <LuGraduationCap size={24} className="text-white" />
-  <span className="text-white text-sm leading-none self-center">
+  <LuGraduationCap size={18} className="text-white self-center" />
+  <span className="text-white text-xs leading-snug max-w-[280px] self-center">
      <b>Bachelor's of Science in Computer Science, 2028</b>
   </span>
 
-  {/* Work */}
-  <MdWorkOutline size={24} className="text-white" />
-  <span className="text-white text-sm leading-none self-center">
-    <b>DL Research Assistant at Advanced Quantum Materials Lab</b>
-  </span>
-</div>
-     
+      {/* Work */}
+      <MdWorkOutline size={18} className="text-white self-center" />
+      <span className="text-white text-xs leading-snug max-w-[280px] self-center">
+        <b>DL Research Assistant at Advanced Quantum Materials Lab</b>
+      </span>
+      </div>
     </div>
   );
 }
