@@ -38,19 +38,7 @@ export default function About_Me() {
         />
       </div>
 
-      {/* A Piece Of My Life*/}
-      <div className="flex justify-center mb-8 mr-240 ">
-        <Shuffle
-          text="A Piece Of My Life"
-          shuffleDirection="left"
-          ease="power2.out"
-          duration={1.4}
-          shuffleTimes={1}
-          stagger={0.03}
-          loop
-          loopDelay={2}
-        />
-      </div>
+     
       <p className="text-xl mt-4 text-center leading-relaxed pt-[2rem]"><strong>Some photos I love i took during my First/Second Year of College</strong> </p>
 
 
@@ -70,19 +58,7 @@ export default function About_Me() {
         ))}
       </div>
 
-      {/* Music */}
-      <div className="flex justify-center mr-308 pt-[4rem] ">
-        <Shuffle
-          text="Music"
-          shuffleDirection="left"
-          ease="power2.out"
-          duration={1.4}
-          shuffleTimes={1}
-          stagger={0.03}
-          loop
-          loopDelay={2}
-        />
-      </div>
+    
       <p className="text-xl mt-4 text-center leading-relaxed pt-[2rem]"><strong>Some of the Music I like</strong> </p>
 
       
