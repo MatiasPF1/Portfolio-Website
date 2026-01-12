@@ -16,7 +16,7 @@ const projects = [
     title: 'Colorstack Stevens Chapter Website',
     description:
       'Lead Developer of the website for the Stevens Institute of Technology chapter of ColorStack, an organization dedicated to supporting Black and Latinx students in tech.',
-    image: '/colorstack.png',
+    image: '/Colorstack.png',
     tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     repo: 'https://github.com/MatiasPF1/Colorstack-StevensChapter',
   },
@@ -33,12 +33,6 @@ const projects = [
 export default function Projects_Section() {
   return (
     <section className="w-full min-h-screen text-[#fcf4f4] font-press-start relative">
-      {/* Subtle Background Ambience */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
-        <div className="absolute top-40 left-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-40 right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]"></div>
-      </div>
-
       {/* Title */}
       <div className="flex justify-center mb-10 -translate-y-64 relative z-10">
         <Shuffle
@@ -97,7 +91,7 @@ export default function Projects_Section() {
                                border border-cyan-400/50
                                text-cyan-300 bg-cyan-400/5
                                transition-all duration-300
-                               hover:bg-cyan-400/10 hover:border-cyan-400/60"
+                               hover:bg-cyan-400/15 hover:border-cyan-400/70"
                   >
                     {tech}
                   </span>
@@ -111,11 +105,11 @@ export default function Projects_Section() {
                 className="mt-4 text-center px-5 py-3 rounded-xl text-xs font-semibold
                            bg-cyan-500 text-black
                            transition-all duration-300
-                           hover:bg-cyan-400
+                           hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/40
                            hover:scale-[1.02]
                            active:scale-95"
               >
-                View Project →
+                View Project 
               </Link>
             </div>
           </div>
