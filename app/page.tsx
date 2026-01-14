@@ -10,7 +10,6 @@ export default function Home() {
   return (
     <main className="relative z-10 min-h-screen flex flex-col">
       <Navbar />
-      
       {/* Hero Section Container */}
       <section id="home" className="flex flex-row items-start justify-center gap-14 px-8 mt-38 mb-15 max-w-[1100px] mx-auto w-full mr-[14%]">
         <Hero_Section_Text />

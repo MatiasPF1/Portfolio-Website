@@ -1,59 +1,73 @@
 import Link from "next/link";
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Navbar() {
   return (
-    //nav container
     <nav
-      className="flex justify-between items-center bg-[rgba(26,26,40,0.7)] px-16 py-6 rounded-xl shadow-xl border border-[rgba(255,255,255,0.15)] backdrop-blur-xl fixed w-[calc(100%-6rem)] z-50 max-w-[1120px] mx-auto mt-6 left-1/2 top-0 transform -translate-x-1/2 transition-all duration-500"
+      className="
+      fixed top-4 left-1/2 -translate-x-1/2 z-50
+      flex items-center justify-between
+      w-[calc(100%-9rem)] md:w-[calc(100%-6rem)] max-w-[1120px]
+      px-15 py-5 md:px-16 md:py-6 
+    bg-[rgba(26,26,40,0.7)]
+      rounded-xl shadow-xl
+      border border-[rgba(255,255,255,0.15)]
+      backdrop-blur-xl
+      transition-all duration-500
+      "
     >
-      {/* Logo (left side) */}
-      <div>
-        <Link href="/" className="text-white text-xl font-bold no-underline tracking-wide">
+      <div className="hidden md:block"> {/* Name — hidden on mobile */}
+        <Link
+          href="/"
+          className="text-white text-xl font-bold tracking-wide" 
+        >
           Matias Freire
         </Link>
       </div>
 
-      {/* Navigation Links (center/right) */}
-      <ul className="flex gap-8 list-none m-0">
-        <li>
-          <a href="#home" className="text-[#ccc] text-sm no-underline uppercase transition-colors duration-300 hover:text-white">
-            Home
-          </a>
-        </li>
+      {/* Nav links */}
+      <ul className="flex gap-4 md:gap-8 list-none m-0">
 
-        <li>
-          <a href="#skills" className="text-[#ccc] text-sm no-underline uppercase transition-colors duration-300 hover:text-white">
-            Skills
-          </a>
-        </li>
+        {["Home", "Skills", "About", "Projects"].map((item) => (
+          <li key={item}>
 
-        <li>
-          <a href="#about" className="text-[#ccc] text-sm no-underline uppercase transition-colors duration-300 hover:text-white">
-            About
-          </a>
-        </li>
+            <a
+              href={`#${item.toLowerCase()}`}
+              className="
+                text-[#ccc] text-xs md:text-sm
+                uppercase tracking-wide
+                transition-colors duration-300
+                hover:text-white
+              "
+            >
+              {item}
+            </a>
 
-        <li>
-          <a href="#projects" className="text-[#ccc] text-sm no-underline uppercase transition-colors duration-300 hover:text-white">
-            Projects
-          </a>
-        </li>
+          </li>
+        ))}
       </ul>
 
-      {/* LinkedIn and GitHub Icons & Links */}
-      <ul className="flex gap-5 list-none m-0 p-0">
+      {/* Icons */}
+      <ul className="flex gap-3 md:gap-5 list-none m-0 p-0">
         <li>
-          <a href="https://github.com/MatiasPF1" target="_blank" rel="noopener noreferrer" className="text-[#ccc] hover:text-white transition-colors duration-300" aria-label="GitHub">
-            <FaGithub size={28} />
+          <a
+            href="https://github.com/MatiasPF1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#ccc] hover:text-white transition-colors"
+          >
+            <FaGithub className="w-5 h-5 md:w-7 md:h-7" />
           </a>
         </li>
 
         <li>
-          <a href="https://www.linkedin.com/in/matias43/" target="_blank" rel="noopener noreferrer" className="text-[#ccc] hover:text-white transition-colors duration-300" aria-label="LinkedIn">
-            <FaLinkedin size={28} />
+          <a
+            href="https://www.linkedin.com/in/matias43/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#ccc] hover:text-white transition-colors"
+          >
+            <FaLinkedin className="w-5 h-5 md:w-7 md:h-7" />
           </a>
         </li>
       </ul>
