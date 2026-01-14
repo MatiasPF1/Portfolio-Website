@@ -7,7 +7,7 @@ export default function Navbar() {
       className="
       fixed top-4 left-1/2 -translate-x-1/2 z-50
       flex items-center justify-between
-      w-[calc(100%-9rem)] md:w-[calc(100%-6rem)] max-w-[1120px]
+      w-[calc(100%-1rem)] md:w-[calc(100%-7rem)] max-w-[1120px]
       px-15 py-5 md:px-16 md:py-6 
     bg-[rgba(26,26,40,0.7)]
       rounded-xl shadow-xl

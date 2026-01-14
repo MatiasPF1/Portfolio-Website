@@ -3,7 +3,7 @@ import Shuffle from '@/Reactbits_Components/Shuffletext';
 export default function Hero_Section_Text() {
   return (
     // Left Section - Text Content  
-    <div className="text-[#fcf4f4] font-press-start max-w-lg mt-2">
+    <div className="text-[#fcf4f4] font-press-start max-w-lg mt-2 mx-auto md:mx-0 text-center md:text-left">
       <Shuffle
         text="Hi!, I'm Matias!"
         shuffleDirection="left"
@@ -24,7 +24,7 @@ export default function Hero_Section_Text() {
       <span className="text-[#a6b6e4db] font-bold">Machine Learning Engineering</span>, or  <span className="text-[#a6b6e4db] font-bold"> R&amp;D.</span>
         </p>
 
-        <p className="text-lg text-slate-100 leading-relaxed font-medium max-w-lg mt-5">
+        <p className="text-lg text-slate-100 leading-relaxed font-medium max-w-lg mt-5 hidden md:block">
         Regarding my campus involvement and leadership, I am a member of the{" "}
         <span className="text-[#a6b6e4db] font-bold">Advanced Quantum Materials Lab</span>.
         I serve on the{" "}
@@ -36,10 +36,10 @@ export default function Hero_Section_Text() {
       </div>
 
       {/* Buttons for Contact me and Cv */}
-      <div className="flex gap-5 mt-8 ml-25">
+      <div className="mt-8 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 sm:gap-5">
         <a 
           href="mailto:matiaspfreire@gmail.com"
-          className="px-6 py-3 rounded-lg bg-[#a6b6e4] text-[#101624] text-base font-semibold 
+          className="w-full sm:w-auto text-center px-6 py-3 rounded-lg bg-[#a6b6e4] text-[#101624] text-base font-semibold 
                    transition-all duration-200 ease-out
                    hover:bg-[#92a6de] hover:scale-105 hover:shadow-lg">
           Contact Me
@@ -49,7 +49,7 @@ export default function Hero_Section_Text() {
           href="/MatiasFreire_Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-6 py-3 rounded-lg border border-[#a6b6e4] text-[#a6b6e4] text-base
+          className="w-full sm:w-auto text-center px-6 py-3 rounded-lg border border-[#a6b6e4] text-[#a6b6e4] text-base
                    transition-all duration-200 ease-out
                    hover:bg-[#a6b6e4]/10 hover:scale-105 hover:shadow-lg">
           Resume

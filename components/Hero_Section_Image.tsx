@@ -9,9 +9,9 @@ import { MdWorkOutline } from "react-icons/md"; // Work Outline Icon
 
 export default function Hero_Section() {
   return (
-    <div className="flex flex-col items-start shrink-0 ml-9">
+    <div className="flex flex-col items-start shrink-0 ml-9 md:ml-3">
       {/* Image Container */}
-      <div className="relative h-[380px] w-[310px] rounded-xl shadow-lg">
+      <div className="relative h-[380px] w-[310px] rounded-xl shadow-lg ">
         <Image
           src="/Matias.jpeg"
           alt="Hero Image"
@@ -21,8 +21,8 @@ export default function Hero_Section() {
         />
       </div>
 
-      {/* Status of Hero */}
-      <div className="mt-3 ml-8 grid grid-cols-[auto_1fr] gap-x-2 gap-y-3 py-2">
+  {/* Status of Hero */}
+  <div className="mt-3 ml-8 grid grid-cols-[auto_1fr] gap-x-2 gap-y-3 py-2 hidden md:block">
 
 
   {/* Location */}
