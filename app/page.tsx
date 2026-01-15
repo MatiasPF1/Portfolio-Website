@@ -22,7 +22,7 @@ export default function Home() {
       <div id="about">
         <About_Me />
       </div>
-      <div id="projects">
+      <div id="projects" className="-translate-y-14">
         <Projects_Section />
       </div>
 
