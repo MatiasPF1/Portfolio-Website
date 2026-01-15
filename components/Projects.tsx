@@ -32,9 +32,9 @@ const projects = [
 
 export default function Projects_Section() {
   return (
-    <section className="w-full min-h-screen text-[#fcf4f4] font-press-start relative">
+    <section className="w-full min-h-screen text-[#fcf4f4] font-press-start  md:pt-12">
       {/* Title */}
-      <div className="flex justify-center mb-10 -translate-y-64 relative z-10">
+      <div className="flex justify-center mb-16 md:mb-20">
         <Shuffle
           text="Projects"
           shuffleDirection="left"
@@ -48,7 +48,7 @@ export default function Projects_Section() {
       </div>
 
       {/* Projects Grid */}
-      <div className="mx-auto max-w-[1300px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 -translate-y-54 relative z-10">
+      <div className="mx-auto max-w-[1300px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 pb-24">
         {projects.map((project, i) => (
           <div
             key={i}

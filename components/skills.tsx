@@ -16,10 +16,10 @@ const skills = [
 ];
 export default function Skill_Section() {
   return (
-    <section className="w-full mt-20 text-[#fcf4f4] font-press-start">
+    <section className="w-full mt-16 sm:mt-20 text-[#fcf4f4] font-press-start">
       
       {/* Title */}
-      <div className="flex justify-center mb-16">
+      <div className="flex justify-center mb-10 sm:mb-16">
         <Shuffle
           text="Skills"
           shuffleDirection="left"
@@ -33,18 +33,20 @@ export default function Skill_Section() {
       </div>
 
       {/* Grid container */}
-      <div className="max-w-9xl mx-auto px-10">
-        <div className="grid grid-cols-4 gap-x-9 gap-y-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-6 lg:gap-x-9 gap-y-4 sm:gap-y-6 lg:gap-y-10">
           {skills.map((skill) => (
             <div
               key={skill}
               className="
                 flex items-center justify-center
-                h-20
-                rounded-xl
+                h-14 sm:h-16 lg:h-20
+                px-3
+                text-center leading-tight
+                rounded-lg sm:rounded-xl
                 border border-white/15
                 bg-[#0b1220]/60
-                text-slate-100 text-base
+                text-slate-100 text-xs sm:text-sm lg:text-base
                 backdrop-blur-md
                 transition-all duration-200 ease-out
                 hover:scale-[1.03]
