@@ -32,9 +32,9 @@ const projects = [
 
 export default function Projects_Section() {
   return (
-    <section className="w-full min-h-screen text-[#fcf4f4] font-press-start  md:pt-12">
+    <section className="w-full min-h-screen text-[#fcf4f4] font-press-start md:-mt-32 lg:-mt-48">
       {/* Title */}
-      <div className="flex justify-center mb-16 md:mb-20">
+      <div className="flex justify-center mb-6 md:mb-20">
         <Shuffle
           text="Projects"
           shuffleDirection="left"
