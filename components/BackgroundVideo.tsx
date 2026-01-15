@@ -5,9 +5,12 @@ import { useEffect, useRef } from 'react';
 export default function BackgroundVideo() {
   //Used to force execution of the video 
   const videoRef = useRef<HTMLVideoElement>(null);
+  
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.play().catch(() => {});
     }
   }, []);
 
@@ -16,16 +19,13 @@ export default function BackgroundVideo() {
       <video
         ref={videoRef}
         className="w-full h-full object-cover"
-        src="/Particles.mp4"
         autoPlay
         muted
         loop
         playsInline
-        preload="auto"
-        controls={false}
-        disablePictureInPicture
-        webkit-playsinline="true"
-      />
+      >
+      <source src="/Particles.mp4" type="video/mp4" />
+      </video>
     </div>
   );
 }
