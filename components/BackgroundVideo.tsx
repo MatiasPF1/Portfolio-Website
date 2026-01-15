@@ -5,7 +5,7 @@ export default function BackgroundVideo() {
     <div className="fixed inset-0 z-0">
       <video
         className="w-full h-full object-cover"
-        src="/Particles.webm"
+        src="/Particles.mp4"
         autoPlay
         muted
         loop
