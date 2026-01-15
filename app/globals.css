@@ -2,7 +2,6 @@
 @import "tw-animate-css";
 
 
-
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 120px; /* Offset for fixed navbar */

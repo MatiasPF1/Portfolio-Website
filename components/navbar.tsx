@@ -5,31 +5,43 @@ export default function Navbar() {
   return (
     <nav
       className="
-      fixed top-4 left-1/2 -translate-x-1/2 z-50
-      flex items-center justify-between
-      md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-24
-      w-[calc(100%-0.5rem)] md:w-[calc(100%-7rem)] max-w-280
-      px-15 py-5 md:pl-12 md:pr-16 md:py-6 
-      bg-[rgba(26,26,40,0.7)]
-      rounded-xl shadow-xl
-      border border-[rgba(255,255,255,0.15)]
-      backdrop-blur-xl
-      transition-all duration-500
+        fixed top-4 left-1/2 -translate-x-1/2 z-50
+        flex items-center justify-between
+
+        md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-24
+
+        w-[calc(100%-0.5rem)] md:w-[calc(100%-7rem)] max-w-280
+
+        px-4 py-3 md:pl-12 md:pr-16 md:py-6
+
+        bg-[rgba(26,26,40,0.7)]
+        rounded-xl shadow-xl
+        border border-[rgba(255,255,255,0.15)]
+        backdrop-blur-xl
+        transition-all duration-500
       "
     >
+      {/* Name — desktop only */}
       <div className="hidden md:flex md:items-center md:justify-start">
         <Link
           href="/"
-          className="text-white text-xl font-bold tracking-wide" 
+          className="text-white text-xl font-bold tracking-wide"
         >
           Matias Freire
         </Link>
       </div>
 
       {/* Nav links */}
-      <ul className="flex justify-start md:justify-center gap-5 md:gap-4 list-none m-0 md:mr-8">
+      <ul className="
+        flex items-center justify-center
+        gap-4 md:gap-4
+        list-none m-0
+      ">
         {["Home", "Skills", "About", "Projects"].map((item) => (
-          <li key={item}>
+          <li
+            key={item}
+            className={item === "Home" ? "hidden sm:block md:block" : ""}
+          >
             <Link
               href={`#${item.toLowerCase()}`}
               className="
@@ -46,7 +58,11 @@ export default function Navbar() {
       </ul>
 
       {/* Icons */}
-      <ul className="flex justify-end gap-4 md:gap-5 list-none m-0 p-0 md:ml-8">
+      <ul className="
+        flex items-center justify-end
+        gap-4 md:gap-5
+        list-none m-0 p-0
+      ">
         <li>
           <Link
             href="https://github.com/MatiasPF1"
