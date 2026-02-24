@@ -8,9 +8,9 @@ export default function Hero_Section() {
   return (
     <div className="flex flex-col items-start md:items-center shrink-0">
       {/* Image Container */}
-      <div className="relative h-[380px] w-[310px] rounded-xl shadow-lg">
+      <div className="relative h-[350px] w-[310px] rounded-xl shadow-lg">
         <Image
-          src="/Matias.jpeg"
+          src="/Anime.jpg"
           alt="Hero Image"
           fill
           className="object-cover rounded-xl"

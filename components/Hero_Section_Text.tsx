@@ -46,7 +46,7 @@ export default function Hero_Section_Text() {
         </a>
 
         <a
-          href="/MatiasFreire_Resume.pdf"
+          href="/Matias_Freire.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="w-full sm:w-auto text-center px-6 py-3 rounded-lg border border-[#a6b6e4] text-[#a6b6e4] text-base
