@@ -4,7 +4,7 @@ const skills = [
   'TypeScript',
   'Next.js',
   'React',
-  'Tailwind CSS',
+  'Tailwind',
   'Python',
   'C/C++',
   'Java',
