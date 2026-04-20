@@ -12,6 +12,17 @@ const projects = [
     tech: ['Pytorch', 'Dash-Plotly', 'CSS'],
     repo: 'https://github.com/MatiasPF1/MoS2-Image-Synthesis-Analysis-Platform',
   },
+
+  {
+    title: 'SHPE Stevens Chapter Website',
+    description:
+      'Lead Developer of the website for the Stevens Institute of Technology chapter of SHPE, an organization dedicated to supporting Hispanic students in Engeenier.',
+    image: '/SHPE.png',
+    tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    repo: 'https://github.com/MatiasPF1/SHPE-Stevens-Chapter',
+  },
+
+  
   {
     title: 'Colorstack Stevens Chapter Website',
     description:
@@ -28,6 +39,10 @@ const projects = [
     tech: ['Pytorch', 'Streamlit', 'Pygame'],
     repo: 'https://github.com/MatiasPF1/Interactive-Neural-Network-Digit-Classifier',
   },
+
+
+
+
 ];
 
 export default function Projects_Section() {
