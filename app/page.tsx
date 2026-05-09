@@ -1,5 +1,4 @@
 import Navbar from "@/components/navbar";
-import Hero_Section from "@/components/Hero_Section_Image";
 import Hero_Section_Text from "@/components/Hero_Section_Text";
 import Skill_Section from "@/components/skills";
 import About_Me from "@/components/AboutMe";
@@ -11,9 +10,8 @@ export default function Home() {
     <main className="relative z-10 min-h-screen flex flex-col">
       <Navbar />
       {/* Hero Section Container, This was creates to do a fast */}
-      <section id="home" className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-14 px-8 mt-38 mb-15 max-w-[1100px] mx-auto">
+      <section id="home" className="flex flex-col items-center px-8 mt-38 mb-15 max-w-[1100px] mx-auto w-full">
         <Hero_Section_Text />
-        <Hero_Section />
       </section>
       
       <div id="skills">

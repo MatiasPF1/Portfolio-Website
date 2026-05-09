@@ -2,11 +2,10 @@ import Image from "next/image";
 
 import { CiLocationOn } from "react-icons/ci"; //Location Icon
 import { LuGraduationCap } from "react-icons/lu"; //Graduation Cap Icon
-import { MdWorkOutline } from "react-icons/md"; // Work Outline Icon
 
 export default function Hero_Section() {
   return (
-    <div className="flex flex-col items-start md:items-center shrink-0">
+    <div className="flex flex-col items-center shrink-0">
       {/* Image Container */}
       <div className="relative h-[345px] w-[310px] rounded-xl shadow-lg">
         <Image
@@ -19,24 +18,26 @@ export default function Hero_Section() {
       </div>
 
       {/* Status of Hero */}
-      <div className="mt-3 hidden md:grid grid-cols-[auto_1fr] gap-x-2 gap-y-3 py-2 max-w-[310px]">
+      <div className="mt-3 grid grid-cols-[auto_1fr] gap-x-2 gap-y-2.5 py-2 max-w-[310px]">
         {/* Location */}
-        <CiLocationOn size={18} className="text-white self-center" />
-        <span className="text-white text-xs leading-tight self-center">
+        <CiLocationOn size={17} className="text-white self-center" />
+        <span className="text-white text-[14px] leading-tight self-center">
           <b>New York Metropolitan Area</b>
         </span>
 
         {/* Education */}
-        <LuGraduationCap size={18} className="text-white self-center" />
-        <span className="text-white text-xs leading-snug self-center">
-          <b>Bachelor's of Science in Computer Science, 2028</b>
+        <LuGraduationCap size={17} className="text-white self-center" />
+        <span className="text-white text-[14px] leading-snug self-center">
+          <b>B.S. Computer Science, Stevens Institute of Technology, 2028</b>
         </span>
 
-        {/* Work */}
-        <MdWorkOutline size={18} className="text-white self-center" />
-        <span className="text-white text-xs leading-snug self-center">
-          <b>DL Research Assistant at Advanced Quantum Materials Lab</b>
+        {/* Cornell Tech AI Fellow */}
+        <LuGraduationCap size={17} className="text-white self-center" />
+        <span className="text-white text-[14px] leading-snug self-center">
+          <b>Cornell Tech AI Fellow 2026/2027</b>
         </span>
+
+        
       </div>
     </div>
   );
