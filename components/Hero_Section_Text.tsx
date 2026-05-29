@@ -53,15 +53,15 @@ export default function Hero_Section_Text() {
             </h1>
             <div className="flex flex-col gap-4">
               <div className="border-l-2 border-[#a6b6e4]/30 pl-4">
-                <p className="text-lg font-medium text-slate-100"><span className="text-[#a6b6e4db] font-bold">ColorStack</span></p>
+                <p className="text-lg font-medium text-slate-100"><span className="text-[#a6b6e4db] font-bold">Stevens ColorStack</span></p>
                 <p className="text-lg font-medium text-slate-300">Vice President</p>
               </div>
               <div className="border-l-2 border-[#a6b6e4]/30 pl-4">
-                <p className="text-lg font-medium text-slate-100"><span className="text-[#a6b6e4db] font-bold">SHPE</span></p>
+                <p className="text-lg font-medium text-slate-100"><span className="text-[#a6b6e4db] font-bold">Stevens SHPE</span></p>
                 <p className="text-lg font-medium text-slate-300">Chief Web Officer</p>
               </div>
               <div className="border-l-2 border-[#a6b6e4]/30 pl-4">
-                <p className="text-lg font-medium text-slate-100"><span className="text-[#a6b6e4db] font-bold">TCRA · STEP</span></p>
+                <p className="text-lg font-medium text-slate-100"><span className="text-[#a6b6e4db] font-bold">TCRA · Stevens STEP Bridge Summer Program</span></p>
                 <p className="text-lg font-medium text-slate-300">Mentored 50+ students (Summer 2025)</p>
               </div>
             </div>
