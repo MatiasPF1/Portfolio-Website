@@ -34,7 +34,7 @@ export default function Hero_Section_Text() {
             <div className="flex flex-col gap-4">
               <div className="border-l-2 border-[#a6b6e4]/30 pl-4">
                 <p className="text-lg font-medium text-slate-100"><span className="text-[#a6b6e4db] font-bold">SWE Intern · Wabtec</span></p>
-                <p className="text-lg font-medium text-slate-300"> Modular Control Architecture(MCA) team. Working in data distribution services(DDS) projects</p>
+                <p className="text-lg font-medium text-slate-300"> Modular Control Architecture(MCA) team. Working with data distribution services(DDS) using RIT Python API</p>
               </div>
               <div className="border-l-2 border-[#a6b6e4]/30 pl-4">
                 <p className="text-lg font-medium text-slate-100"><span className="text-[#a6b6e4db] font-bold">Undergraduate Researcher · AQM Lab</span></p>
@@ -80,7 +80,7 @@ export default function Hero_Section_Text() {
               Contact Me
             </a>
             <a
-              href="/Matias_Freire.pdf"
+              href="/MatiasFreire_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="text-center px-6 py-3 rounded-lg border border-[#a6b6e4] text-[#a6b6e4] text-base
