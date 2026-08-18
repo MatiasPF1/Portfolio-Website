@@ -109,7 +109,7 @@ export default function Hero_Section_Text() {
 
       {/* --------------------------------------- experience + leadership -- */}
       <Reveal delay={80}>
-        <div className="mt-12 grid gap-x-14 gap-y-8 border-t border-white/8 pt-8 md:mt-16 md:grid-cols-2">
+        <div className="mt-9 grid gap-x-14 gap-y-8 border-t border-white/8 pt-7 md:mt-10 md:grid-cols-2">
           <div>
             <h3 className="pixel text-paper-mute">Experience</h3>
             <ul className="mt-5 flex flex-col">

@@ -5,9 +5,9 @@ import Reveal from "@/components/Reveal";
 
 export default function Footer() {
   return (
-    <footer className="mx-auto w-full max-w-5xl px-6 pb-16 pt-8 md:pb-24">
+    <footer className="mx-auto w-full max-w-5xl px-6 pb-10 pt-4 md:pb-14">
       <Reveal>
-        <div className="flex flex-col gap-8 border-t border-white/8 pt-10 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col gap-8 border-t border-white/8 pt-8 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="pixel text-paper-mute">Get in touch</p>
             <a

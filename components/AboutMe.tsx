@@ -23,13 +23,13 @@ const music = [
 
 export default function About_Me() {
   return (
-    <section id="about" className="mx-auto w-full max-w-4xl px-6 py-16 md:py-24">
+    <section id="about" className="mx-auto w-full max-w-4xl px-6 py-10 md:py-14">
       <Reveal>
         <SectionHeading index="03" eyebrow="About" title="A little more" />
       </Reveal>
 
       <Reveal delay={60}>
-        <div className="mt-8 grid gap-6 md:mt-10 md:grid-cols-2 md:gap-10">
+        <div className="mt-6 grid gap-6 md:mt-7 md:grid-cols-2 md:gap-10">
           <p className="text-base leading-relaxed text-paper-dim">
             I&apos;m a first-generation Ecuadorian computer science student at
             Stevens. I like working where software meets something physical, like
@@ -46,12 +46,12 @@ export default function About_Me() {
 
       {/* ------------------------------------------------------- photos -- */}
       <Reveal delay={80}>
-        <h3 className="pixel mt-12 border-t border-white/8 pt-6 text-paper-mute md:mt-16">
+        <h3 className="pixel mt-9 border-t border-white/8 pt-5 text-paper-mute md:mt-10">
           Moments
         </h3>
       </Reveal>
 
-      <div className="mt-7 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
+      <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
         {moments.map((moment, index) => (
           <Reveal key={moment.image} delay={index * 90} as="article">
             <figure className="group">
@@ -78,12 +78,12 @@ export default function About_Me() {
 
       {/* -------------------------------------------------------- music -- */}
       <Reveal>
-        <h3 className="pixel mt-12 border-t border-white/8 pt-6 text-paper-mute md:mt-16">
+        <h3 className="pixel mt-9 border-t border-white/8 pt-5 text-paper-mute md:mt-10">
           Fav Artists
         </h3>
       </Reveal>
 
-      <div className="mt-7 grid grid-cols-2 gap-4 sm:grid-cols-4 md:gap-5">
+      <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4 md:gap-5">
         {music.map((artist, index) => (
           <Reveal key={artist.image} delay={(index % 4) * 80} as="article">
             <figure className="group">

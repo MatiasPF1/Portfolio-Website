@@ -11,7 +11,7 @@ const groups = [
 
 export default function Skill_Section() {
   return (
-    <section id="skills" className="mx-auto w-full max-w-5xl px-6 py-16 md:py-24">
+    <section id="skills" className="mx-auto w-full max-w-5xl px-6 py-10 md:py-14">
       <Reveal>
         <SectionHeading
           index="02"
@@ -21,7 +21,7 @@ export default function Skill_Section() {
         />
       </Reveal>
 
-      <div className="mt-10 md:mt-12">
+      <div className="mt-7 md:mt-8">
         {groups.map((group, index) => (
           <Reveal key={group.label} delay={index * 80}>
             {/* A labelled row per group rather than a wall of identical tiles —

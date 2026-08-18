@@ -46,7 +46,7 @@ export default function SectionHeading({
         />
       </div>
 
-      <h2 className="display mt-5 text-[2.1rem] leading-[1.05] text-paper sm:text-5xl md:text-[3.4rem]">
+      <h2 className="display mt-4 text-[2.1rem] leading-[1.05] text-paper sm:text-5xl md:text-[3.4rem]">
         {title}
       </h2>
 

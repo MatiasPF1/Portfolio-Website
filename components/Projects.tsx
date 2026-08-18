@@ -9,10 +9,18 @@ const projects = [
   {
     title: "MoS₂ Image Synthesis & Analysis Platform",
     description:
-      "A pipeline for synthesizing realistic computational scanning transmission electron microscopy (STEM) images, built for deep-learning studies of defects in 2D nanomaterials.",
+      "A pipeline for synthesizing realistic computational scanning transmission electron microscopy (STEM) images, built for deep-learning studies of defects in 2D nanomaterials. Wraps Computem's multislice simulation behind a Dockerized Dash interface, so generation, labelling, and analysis run as one tool.",
     image: "/STEM.png",
-    tech: ["PyTorch", "Dash / Plotly", "CSS"],
+    tech: ["PyTorch", "Computem", "Dash / Plotly", "Tooling Integration"],
     repo: "https://github.com/MatiasPF1/MoS2-Image-Synthesis-Analysis-Platform",
+  },
+  {
+    title: "EMR Geometry ML & Bayesian Optimization",
+    description:
+      "Gaussian process, random forest, and XGBoost surrogates trained on ~9,000 simulated extraordinary magnetoresistance sensor geometries, with Bayesian optimization proposing new high-sensitivity shunt designs for follow-up COMSOL runs.",
+    image: "/EMR.png",
+    tech: ["scikit-learn", "XGBoost", "Bayesian Optimization", "PyTorch"],
+    repo: "https://github.com/MatiasPF1/EMR-Machine-Learning-Bayesian-Optimization-Dashboard",
   },
   {
     title: "SHPE Stevens Chapter Website",
@@ -42,7 +50,7 @@ const projects = [
 
 export default function Projects_Section() {
   return (
-    <section id="projects" className="mx-auto w-full max-w-5xl px-6 py-16 md:py-24">
+    <section id="projects" className="mx-auto w-full max-w-5xl px-6 py-10 md:py-14">
       <Reveal>
         <SectionHeading
           index="04"
@@ -52,7 +60,7 @@ export default function Projects_Section() {
         />
       </Reveal>
 
-      <div className="mt-10 grid gap-5 md:mt-12 md:grid-cols-2">
+      <div className="mt-7 grid gap-5 md:mt-8 md:grid-cols-2">
         {projects.map((project, index) => (
           <Reveal key={project.repo} delay={(index % 2) * 100} as="article">
             <Link
