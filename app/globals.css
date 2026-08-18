@@ -1,21 +1,208 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* ============================================================
+   Design tokens — "Between Stars and Sky"
+   Deep-space navy grounded by warm Ghibli daylight accents.
+   ============================================================ */
+@theme {
+  /* Ink — the space end of the scale */
+  --color-ink-950: #04070f;
+  --color-ink-900: #070b16;
+  --color-ink-800: #0b1120;
+  --color-ink-700: #111a2e;
+  --color-ink-600: #1a2540;
 
+  /* Periwinkle — primary accent, carried over from the old site */
+  --color-peri-300: #c3cdec;
+  --color-peri-400: #a6b6e4;
+  --color-peri-500: #8b9dd6;
+
+  /* Sage — Ghibli green, replaces the old cyan */
+  --color-sage-300: #b7d6c6;
+  --color-sage-400: #9dc3b0;
+  --color-sage-500: #7fa993;
+
+  /* Lantern — warm cream, the light in the scene */
+  --color-lantern-300: #f2ddb9;
+  --color-lantern-400: #e9cda0;
+  --color-lantern-500: #d9b47e;
+
+  /* Text */
+  --color-paper: #eef1f8;
+  --color-paper-dim: #b9c2d6;
+  --color-paper-mute: #8894ad;
+
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-body: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-pixel: var(--font-press-start), ui-monospace, monospace;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 120px; /* Offset for fixed navbar */
+  scroll-padding-top: 8.5rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Space Grotesk", sans-serif;
-  background-color: transparent; 
+  background-color: var(--color-ink-900);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  /* The canvas paints the background; never let a white flash through. */
+  overscroll-behavior-y: none;
 }
 
-p {
-  font-family: var(--font-ibm-plex-sans), sans-serif;
+body {
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
 }
 
+::selection {
+  background: color-mix(in oklab, var(--color-peri-400) 35%, transparent);
+  color: var(--color-paper);
+}
+
+/* Thin, unobtrusive scrollbar so it doesn't fight the artwork */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--color-peri-400) 30%, transparent) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--color-peri-400) 25%, transparent);
+  border-radius: 99px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ============================================================
+   Type primitives
+   ============================================================ */
+.display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+/* The pixel face survives as a small accent only — eyebrows, nav, labels.
+   At 10px with wide tracking it reads as a system label, not a headline. */
+.pixel {
+  font-family: var(--font-pixel);
+  font-size: 0.5625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .pixel {
+    font-size: 0.625rem;
+  }
+}
+
+/* ============================================================
+   Surfaces — one glass recipe, used everywhere
+   ============================================================ */
+.glass {
+  background: color-mix(in oklab, var(--color-ink-800) 62%, transparent);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  border: 1px solid rgb(255 255 255 / 0.07);
+}
+
+.hairline {
+  border-top: 1px solid rgb(255 255 255 / 0.08);
+}
+
+/* A single hair of warm light along the top edge — reads as moonlight
+   catching the panel, and keeps flat cards from looking like flat cards. */
+.lit-edge {
+  position: relative;
+}
+.lit-edge::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-lantern-300) 45%, transparent),
+    transparent
+  );
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Paper grain — the painterly layer.
+   Ties the WebGL scene and the DOM into one surface.
+   ============================================================ */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Vignette keeps the eye centered and deepens the corners of the sky. */
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 120% 85% at 50% 42%,
+    transparent 40%,
+    color-mix(in oklab, var(--color-ink-950) 55%, transparent) 100%
+  );
+}
+
+/* ============================================================
+   Reveal — scroll-in transition driven by IntersectionObserver
+   ============================================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.9s var(--ease-out-soft),
+    transform 0.9s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal="shown"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

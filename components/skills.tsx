@@ -1,65 +1,49 @@
-import Shuffle from '@/Reactbits_Components/Shuffletext';
+import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/SectionHeading";
 
-const skills = [
-  'TypeScript',
-  'Next.js',
-  'React',
-  'Tailwind',
-  'Python',
-  'C/C++',
-  'Java',
-  'Git',
-  'PyTorch',
-  'Pandas',
-  'Scikit-Learn',
-  'NumPy',
+const groups = [
+  { label: "Languages", items: ["Python", "TypeScript", "Java", "C/C++", "SQL"] },
+  { label: "Web", items: ["React", "Next.js", "Tailwind CSS", "FastAPI", "Supabase"] },
+  { label: "ML & Data", items: ["PyTorch", "scikit-learn", "NumPy", "Pandas"] },
+  { label: "Systems & Data", items: ["RTI Connext DDS", "Docker", "Redis", "SQLite"] },
+  { label: "Tooling", items: ["Git", "Linux"] },
 ];
+
 export default function Skill_Section() {
   return (
-    <section className="w-full mt-16 sm:mt-20 text-[#fcf4f4] font-press-start">
-      
-      {/* Title */}
-      <div className="flex justify-center mb-10 sm:mb-16">
-        <Shuffle
-          text="Skills"
-          shuffleDirection="left"
-          ease="power2.out"
-          duration={1.4}
-          shuffleTimes={1}
-          stagger={0.03}
-          loop={true}
-          loopDelay={2}
+    <section id="skills" className="mx-auto w-full max-w-5xl px-6 py-16 md:py-24">
+      <Reveal>
+        <SectionHeading
+          index="02"
+          eyebrow="Skills"
+          title="What I build with"
+          description="The tools I reach for across systems work, web engineering, and research."
         />
-      </div>
+      </Reveal>
 
-      {/* Grid container */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-6 lg:gap-x-9 gap-y-4 sm:gap-y-6 lg:gap-y-10">
-          {skills.map((skill) => (
-            <div
-              key={skill}
-              className="
-                flex items-center justify-center
-                h-14 sm:h-16 lg:h-20
-                px-3
-                text-center leading-tight
-                rounded-lg sm:rounded-xl
-                border border-white/15
-                bg-[#0b1220]/60
-                text-slate-100 text-xs sm:text-sm lg:text-base
-                backdrop-blur-md
-                transition-all duration-200 ease-out
-                hover:scale-[1.03]
-                hover:border-white/30
-                hover:shadow-lg
-              "
-            >
-              {skill}
+      <div className="mt-10 md:mt-12">
+        {groups.map((group, index) => (
+          <Reveal key={group.label} delay={index * 80}>
+            {/* A labelled row per group rather than a wall of identical tiles —
+                it says more with less and stays readable at any width. */}
+            <div className="grid gap-3 border-t border-white/8 py-5 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-8 md:py-6">
+              {/* leading-loose because .pixel sets line-height:1, which
+                  collapses a label that wraps onto two lines. */}
+              <h3 className="pixel pt-1 leading-loose text-paper-mute">{group.label}</h3>
+              <ul className="flex flex-wrap gap-2.5">
+                {group.items.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-full border border-white/10 bg-ink-800/50 px-4 py-2 text-sm text-paper-dim backdrop-blur-sm transition-all duration-300 ease-out-soft hover:-translate-y-0.5 hover:border-sage-400/40 hover:bg-sage-400/8 hover:text-paper"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))}
-        </div>
+          </Reveal>
+        ))}
       </div>
-
     </section>
   );
 }

@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Matias Freire, Portfolio
 
-## Getting Started
-
-First, run the development server:
+Personal site built with Next.js (App Router), Tailwind CSS v4 and Three.js.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## The background scene
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The whole page sits on one WebGL scene that reacts to scroll: you start in deep
+space and descend into a painted sky, stars fading out as cloud banks and misty
+hills rise into frame.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| File | Role |
+| --- | --- |
+| `components/BackgroundScene.tsx` | Feature-detects WebGL, renders a static gradient fallback, lazy-loads the scene |
+| `components/three/Scene.tsx` | The `<Canvas>`, camera parallax rig, visibility-based pausing |
+| `components/three/SkyPainting.tsx` | Full-screen fragment shader: sky gradient, cel-lit clouds, moon, hills |
+| `components/three/Starfield.tsx` | Twinkling star points, fade out as the sky fills |
+| `components/three/Spores.tsx` | Warm drifting motes near the camera |
+| `lib/sceneInput.ts` | Scroll and pointer state, read per-frame without re-rendering React |
 
-## Learn More
+Notes for future edits:
 
-To learn more about Next.js, take a look at the following resources:
+- **Scroll drives everything** through `uProgress` (0 at the top of the page,
+  1 at the bottom). Most of the scene's look lives in `SkyPainting.tsx` as
+  pairs of colours mixed by that value.
+- **The canvas renders unmanaged** (`flat linear` on `<Canvas>`), so every
+  colour in the shaders is a literal display value. No tone mapping or colour
+  conversion is applied. Uniform colours are `Vector3`, not `THREE.Color`, for
+  the same reason.
+- **Keep the backdrop dark.** The entire site is near-white text on top of it;
+  `horizonDay` in particular is deliberately dim so the footer stays readable.
+- `prefers-reduced-motion` freezes the scene and disables the reveal
+  transitions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design system
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tokens live in the `@theme` block in `app/globals.css`.
 
-## Deploy on Vercel
+- **Display**: Fraunces, used for headings and names
+- **Body**: IBM Plex Sans
+- **Labels**: Press Start 2P, small sizes only (`.pixel`)
+- **Accents**: periwinkle (primary), sage (tech tags), lantern cream (warm light)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Font variables are declared on `<html>`, not `<body>`. The `--font-*` theme
+tokens that reference them are declared on `:root` and would otherwise resolve
+to nothing.

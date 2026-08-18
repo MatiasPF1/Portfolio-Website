@@ -1,164 +1,108 @@
-'use client';
-import Shuffle from '@/Reactbits_Components/Shuffletext';
+import Image from "next/image";
+
+import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/SectionHeading";
+
+const moments = [
+  { image: "/First-Gen.jpeg", caption: "First-generation Ecuadorian CS student" },
+  { image: "/STEP.jpeg", caption: "My students during the STEP 2025 Bridge Summer Program" },
+  { image: "/SHPE2025.jpeg", caption: "SHPE National Convention 2025, Philadelphia" },
+  { image: "/Hackru.jpeg", caption: "My team at HackRU 2025" },
+];
+
+const music = [
+  { image: "/Malcom.jpeg", name: "Malcolm Todd" },
+  { image: "/bruno-mars.jpg", name: "Bruno Mars" },
+  { image: "/Enanitos_verdes.jpg", name: "Enanitos Verdes" },
+  { image: "/Tame_Impala.jpg", name: "Tame Impala" },
+  { image: "/Grent.jpeg", name: "grentperez" },
+  { image: "/Jane_Remover.jpg", name: "Jane Remover" },
+  { image: "/Laufey1.jpg", name: "Laufey" },
+  { image: "/TheMarias.jpg", name: "The Marías" },
+];
 
 export default function About_Me() {
-  const lifeMoments = [
-    {
-      image: '/First-Gen.jpeg',
-      caption: "First Generation Ecuadorian CS Student "
-    },
-    {
-      image: '/STEP.jpeg',
-      caption: 'My Students During STEP 2025 Bridge Summer Program'
-    },
-    {
-      image: '/SHPE2025.jpeg',
-      caption: 'At SHPE National Conference 2025 in Philadelphia, PA'
-    },
-    {
-      image: '/Hackru.jpeg',
-      caption: 'Me and my Team during HackRu 2025'
-    }
-  ];
-
   return (
-    <section className="w-full min-h-screen mt-24 text-[#fcf4f4] font-press-start px-4 md:px-8">
+    <section id="about" className="mx-auto w-full max-w-4xl px-6 py-16 md:py-24">
+      <Reveal>
+        <SectionHeading index="03" eyebrow="About" title="A little more" />
+      </Reveal>
 
-      {/* About Me */}
-      <div className="flex justify-center mb-16">
-        <Shuffle
-          text="About Me"
-          shuffleDirection="left"
-          ease="power2.out"
-          duration={1.4}
-          shuffleTimes={1}
-          stagger={0.03}
-          loop
-          loopDelay={2}
-        />
-      </div>
+      <Reveal delay={60}>
+        <div className="mt-8 grid gap-6 md:mt-10 md:grid-cols-2 md:gap-10">
+          <p className="text-base leading-relaxed text-paper-dim">
+            I&apos;m a first-generation Ecuadorian computer science student at
+            Stevens. I like working where software meets something physical, like
+            real-time telemetry streaming off a locomotive and microscopy images
+            of two-dimensional materials.
+          </p>
+          <p className="text-base leading-relaxed text-paper-mute">
+            Most of my time outside class goes to the communities that got me
+            here: leading ColorStack and SHPE on campus, building their sites,
+            and mentoring incoming students through STEP Bridge.
+          </p>
+        </div>
+      </Reveal>
 
-     
-      <p className="text-lg md:text-xl mt-4 text-center leading-relaxed pt-[2rem]">
-        <strong>Some photos I love i took during my First/Second Year of College</strong>
-      </p>
+      {/* ------------------------------------------------------- photos -- */}
+      <Reveal delay={80}>
+        <h3 className="pixel mt-12 border-t border-white/8 pt-6 text-paper-mute md:mt-16">
+          Moments
+        </h3>
+      </Reveal>
 
-
-      {/* Photo Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-18 px-4 md:px-15 max-w-345 mx-auto mb-7 pt-[2rem]">
-        {lifeMoments.map((moment, index) => (
-          <div key={index} className="relative group pt-10">
-            <div className="overflow-hidden rounded-lg transition-transform hover:scale-105 mb-5">
-              <img
-                src={moment.image}
-                alt={moment.caption}
-                className="w-full aspect-square object-cover"
-              />
-            </div>
-            <p className="text-sm md:text-base mt-4 text-center leading-relaxed">{moment.caption}</p>
-          </div>
+      <div className="mt-7 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
+        {moments.map((moment, index) => (
+          <Reveal key={moment.image} delay={index * 90} as="article">
+            <figure className="group">
+              <div className="relative aspect-square overflow-hidden rounded-xl border border-white/8 bg-ink-800/40">
+                <Image
+                  src={moment.image}
+                  alt={moment.caption}
+                  fill
+                  sizes="(max-width: 768px) 45vw, 22vw"
+                  className="object-cover transition-transform duration-900 ease-out-soft group-hover:scale-[1.05]"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-linear-to-t from-ink-900/50 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-30"
+                />
+              </div>
+              <figcaption className="mt-3 text-[0.75rem] leading-relaxed text-paper-mute">
+                {moment.caption}
+              </figcaption>
+            </figure>
+          </Reveal>
         ))}
       </div>
 
-    
-      <p className="text-lg md:text-xl mt-4 text-center leading-relaxed pt-[2rem]">
-        <strong>Some of the Music I like</strong>
-      </p>
+      {/* -------------------------------------------------------- music -- */}
+      <Reveal>
+        <h3 className="pixel mt-12 border-t border-white/8 pt-6 text-paper-mute md:mt-16">
+          Fav Artists
+        </h3>
+      </Reveal>
 
-      
-      {/* Music Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 px-4 md:px-8 max-w-[1000px] mx-auto mb-[12rem] md:mb-[24rem] pt-[3rem]">
-        <div className="relative group">
-          <div className="overflow-hidden rounded-lg transition-transform hover:scale-105">
-            <img
-              src="/Malcom.jpeg"
-              alt="Malcom Todd"
-              className="w-full aspect-square object-cover"
-            />
-          </div>
-          <p className="text-xs md:text-md mt-4 text-center leading-relaxed">Malcom Todd</p>
-        </div>
-        
-        <div className="relative group">
-          <div className="overflow-hidden rounded-lg transition-transform hover:scale-105">
-            <img
-              src="/bruno-mars.jpg"
-              alt="Bruno Mars"
-              className="w-full aspect-square object-cover"
-            />
-          </div>
-          <p className="text-xs md:text-md mt-4 text-center leading-relaxed">Bruno Mars</p>
-        </div>
-        
-        <div className="relative group">
-          <div className="overflow-hidden rounded-lg transition-transform hover:scale-105">
-            <img
-              src="/Enanitos_verdes.jpg"
-              alt="Enanitos Verdes"
-              className="w-full aspect-square object-cover"
-            />
-          </div>
-          <p className="text-xs md:text-md mt-4 text-center leading-relaxed">Enanitos Verdes</p>
-        </div>
-        
-        <div className="relative group">
-          <div className="overflow-hidden rounded-lg transition-transform hover:scale-105">
-            <img
-              src="/Tame_Impala.jpg"
-              alt="Tame Impala"
-              className="w-full aspect-square object-cover"
-            />
-          </div>
-          <p className="text-xs md:text-md mt-4 text-center leading-relaxed">Tame Impala</p>
-        </div>
-
-
-        <div className="relative group">
-          <div className="overflow-hidden rounded-lg transition-transform hover:scale-105">
-            <img
-              src="/Grent.jpeg"
-              alt="Grent Perez"
-              className="w-full aspect-square object-cover"
-            />
-          </div>
-          <p className="text-xs md:text-md mt-4 text-center leading-relaxed">Grent Perez</p>
-        </div>
-        
-        <div className="relative group">
-          <div className="overflow-hidden rounded-lg transition-transform hover:scale-105">
-            <img
-              src="/Jane_Remover.jpg"
-              alt="Jane Remover"
-              className="w-full aspect-square object-cover"
-            />
-          </div>
-          <p className="text-xs md:text-md mt-4 text-center leading-relaxed">Jane Remover</p>
-        </div>
-        
-        <div className="relative group">
-          <div className="overflow-hidden rounded-lg transition-transform hover:scale-105">
-            <img
-              src="/Laufey1.jpg"
-              alt="Laufey"
-              className="w-full aspect-square object-cover"
-            />
-          </div>
-          <p className="text-xs md:text-md mt-4 text-center leading-relaxed">Laufey</p>
-        </div>
-        
-        <div className="relative group">
-          <div className="overflow-hidden rounded-lg transition-transform hover:scale-105">
-            <img
-              src="/TheMarias.jpg"
-              alt="The Marias"
-              className="w-full aspect-square object-cover"
-            />
-          </div>
-          <p className="text-xs md:text-md mt-4 text-center leading-relaxed">The Marias</p>
-        </div>
-     
+      <div className="mt-7 grid grid-cols-2 gap-4 sm:grid-cols-4 md:gap-5">
+        {music.map((artist, index) => (
+          <Reveal key={artist.image} delay={(index % 4) * 80} as="article">
+            <figure className="group">
+              <div className="relative aspect-square overflow-hidden rounded-xl border border-white/8 bg-ink-800/40">
+                <Image
+                  src={artist.image}
+                  alt={artist.name}
+                  fill
+                  sizes="(max-width: 640px) 45vw, 22vw"
+                  className="object-cover grayscale-[0.35] transition-all duration-900 ease-out-soft group-hover:scale-[1.05] group-hover:grayscale-0"
+                />
+              </div>
+              <figcaption className="mt-3 text-[0.75rem] text-paper-mute transition-colors duration-300 group-hover:text-paper-dim">
+                {artist.name}
+              </figcaption>
+            </figure>
+          </Reveal>
+        ))}
       </div>
-
     </section>
   );
 }
