@@ -1,13 +1,18 @@
 import Image from "next/image";
 
+import PixelSprite from "@/components/PixelSprite";
+
 /**
  * Portrait card. The frame is doing the work here: a hairline ring, a warm
  * lit top edge picked up from the scene's moonlight, and a gradient foot so
  * the photo dissolves into the panel instead of ending on a hard rectangle.
+ *
+ * It sits a touch crooked, like a print stuck on a wall, and straightens up
+ * when you point at it.
  */
 export default function Hero_Section() {
   return (
-    <figure className="group relative mx-auto w-full max-w-[300px] md:max-w-none">
+    <figure className="group relative mx-auto w-full max-w-[300px] rotate-2 transition-transform duration-700 ease-out-soft hover:rotate-0 md:max-w-none">
       {/* Offset outline — gives the card depth without a drop shadow. */}
       <div
         aria-hidden="true"
@@ -30,6 +35,9 @@ export default function Hero_Section() {
           />
         </div>
       </div>
+
+      {/* A sticker on the corner of the print. */}
+      <PixelSprite name="sparkle" scale={4} className="twinkle absolute -left-4 -top-4" />
     </figure>
   );
 }

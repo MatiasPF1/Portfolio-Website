@@ -8,9 +8,9 @@ import { sceneInput } from "@/lib/sceneInput";
 
 /**
  * The backdrop is a single full-screen fragment shader rather than a stack of
- * meshes: sky gradient, cloud banks, moon and hills all share the same noise
- * field, which is both cheaper and easier to keep tonally consistent than
- * compositing separate textured planes.
+ * meshes: sky gradient, aurora, cloud banks, moon, hills and the village on
+ * them all share the same noise field, which is both cheaper and easier to
+ * keep tonally consistent than compositing separate textured planes.
  *
  * Everything is tuned to stay in the lower quarter of the luminance range —
  * the whole site sits on top of this in near-white text.
@@ -34,6 +34,8 @@ const fragmentShader = /* glsl */ `
   uniform float uProgress;
   uniform float uAspect;
   uniform vec2  uParallax;
+  uniform vec2  uPointer;
+  uniform float uPointerOn;
 
   varying vec2 vUv;
 
@@ -86,6 +88,36 @@ const fragmentShader = /* glsl */ `
     return m;
   }
 
+  // --------------------------------------------------------------- aurora --
+  // Three ribbons, each a curtain with a sharp lower hem that fades upward,
+  // combed into vertical rays. Green at the hem, periwinkle through the body,
+  // a blush of pink at the very top: the palette the rest of the site uses.
+  vec3 aurora(vec2 uv, vec2 p) {
+    vec3 acc = vec3(0.0);
+    float t = uTime;
+
+    for (int i = 0; i < 3; i++) {
+      float fi = float(i);
+
+      float wander = sin(p.x * 1.25 + t * 0.09 + fi * 1.9) * 0.065
+                   + (valueNoise(vec2(p.x * 1.6 - t * 0.04, fi * 3.7)) - 0.5) * 0.10;
+      float hem = 0.60 + fi * 0.08 + wander;
+      float d = uv.y - hem;
+
+      float curtain = smoothstep(-0.012, 0.004, d) * exp(-max(d, 0.0) * (5.0 + fi * 2.5));
+
+      // Rays shimmer sideways; patches let whole stretches of ribbon thin out.
+      float rays = 0.45 + 0.55 * valueNoise(vec2(p.x * 24.0 + fi * 11.0 - t * 0.6, t * 0.25 + fi));
+      float patchy = smoothstep(0.15, 0.65, valueNoise(vec2(p.x * 0.85 + t * 0.025, fi * 5.3 + 2.0)));
+
+      vec3 tint = mix(vec3(0.32, 0.86, 0.64), vec3(0.52, 0.58, 1.00), smoothstep(0.0, 0.10, d));
+      tint = mix(tint, vec3(0.96, 0.56, 0.78), smoothstep(0.05, 0.18, d) * 0.8);
+
+      acc += tint * curtain * rays * patchy * (0.60 - fi * 0.15);
+    }
+    return acc;
+  }
+
   // ---------------------------------------------------------------- hills --
   float ridgeLine(float x, float seed, float amp, float freq) {
     float n = fbm(vec2(x * freq + seed * 13.7, seed * 4.3));
@@ -117,10 +149,18 @@ const fragmentShader = /* glsl */ `
     vec3 col = mix(horizon, mid, smoothstep(-0.05, 0.52, uv.y));
     col = mix(col, top, smoothstep(0.45, 1.05, uv.y));
 
-    // Faint nebula wash, only while we are still out in space.
+    // Nebula wash in two inks, periwinkle and plum, while we're out in space.
     float nebula = fbm(p * 1.6 + vec2(uTime * 0.004, 0.0));
-    nebula = smoothstep(0.48, 0.95, nebula) * smoothstep(0.15, 0.9, uv.y);
-    col += vec3(0.10, 0.11, 0.26) * nebula * 0.42 * (1.0 - prog);
+    nebula = smoothstep(0.46, 0.95, nebula) * smoothstep(0.12, 0.9, uv.y);
+    float ink = valueNoise(p * 0.9 + vec2(3.1, uTime * 0.003));
+    vec3 nebulaCol = mix(vec3(0.10, 0.12, 0.30), vec3(0.24, 0.10, 0.25), smoothstep(0.3, 0.75, ink));
+    col += nebulaCol * nebula * 0.55 * (1.0 - 0.75 * prog);
+
+    // ----------------------------------------------------------- aurora ---
+    // Present from the first screen, fullest in the middle of the page, and
+    // gone by the time the footer lands on the hills.
+    float auroraAmt = mix(0.80, 1.0, smoothstep(0.05, 0.35, prog)) * (1.0 - smoothstep(0.62, 0.92, prog));
+    col += aurora(uv, p) * 0.42 * auroraAmt;
 
     // ------------------------------------------------------------ moon ----
     // Placed to land in the gap between the headline and the portrait on wide
@@ -129,14 +169,27 @@ const fragmentShader = /* glsl */ `
     float portraitMode = smoothstep(1.10, 0.70, uAspect);
     vec2 moonUv = mix(vec2(0.580, 0.800), vec2(0.800, 0.880), portraitMode);
     vec2 moonPos = vec2(moonUv.x * uAspect, moonUv.y + 0.06 * prog);
-    float dm = length(p - moonPos);
+    vec2 toMoon = p - moonPos;
+    float dm = length(toMoon);
 
     float halo = exp(-dm * 9.0) * 0.30 + exp(-dm * 26.0) * 0.28;
     col += mix(vec3(0.62, 0.69, 0.92), vec3(0.95, 0.88, 0.74), prog) * halo * moonFade;
 
+    // A faint moon ring, warm inside and cool outside like the real thing.
+    float ringD = (dm - 0.135) / 0.016;
+    float ring = exp(-ringD * ringD);
+    vec3 ringCol = mix(vec3(0.42, 0.34, 0.30), vec3(0.30, 0.38, 0.62), smoothstep(-1.0, 1.0, ringD));
+    col += ringCol * ring * 0.13 * moonFade;
+
     float disc = smoothstep(0.049, 0.044, dm);
-    float mare = fbm((p - moonPos) * 26.0) * 0.16;
+    float mare = fbm(toMoon * 26.0) * 0.16;
+    // Soft terminator so the disc reads as a lit sphere, not a sticker: shade
+    // with the sphere's surface normal, lit from the upper left.
+    vec2 moonXY = toMoon / 0.049;
+    vec3 moonNormal = vec3(moonXY, sqrt(max(0.0, 1.0 - dot(moonXY, moonXY))));
+    float moonLit = clamp(dot(moonNormal, normalize(vec3(-0.45, 0.55, 0.70))), 0.0, 1.0);
     vec3 moonCol = mix(vec3(0.86, 0.89, 0.97), vec3(0.98, 0.95, 0.88), prog) - mare;
+    moonCol *= 0.80 + 0.20 * moonLit;
     col = mix(col, moonCol, disc * moonFade);
 
     // ---------------------------------------------------------- clouds ----
@@ -171,12 +224,14 @@ const fragmentShader = /* glsl */ `
 
     // ----------------------------------------------------------- hills ----
     // The ridges climb far enough by the end of the page that the footer lands
-    // against dark silhouette rather than the pale mist above it.
+    // against dark silhouette rather than the pale mist above it. Painted far
+    // to near, so each nearer ridge overlaps the one behind it.
     float hillsFade = smoothstep(0.28, 0.78, prog);
     float rise = -0.34 + 0.54 * prog;
+    vec3 lantern = vec3(1.00, 0.80, 0.50);
 
     for (int i = 0; i < 3; i++) {
-      float fi = float(i);
+      float fi = 2.0 - float(i);
       float seed = 1.0 + fi * 2.0;
       float base = rise + fi * 0.075;
       float h = base + ridgeLine(p.x, seed, 0.10 - fi * 0.022, 0.55 + fi * 0.42);
@@ -189,11 +244,32 @@ const fragmentShader = /* glsl */ `
       float m = smoothstep(h + 0.003, h - 0.003, uv.y);
       vec3 hillCol = mix(vec3(0.020, 0.031, 0.063), vec3(0.043, 0.063, 0.090), fi / 2.0);
       col = mix(col, hillCol, m * hillsFade);
+
+      // A village on the middle ridge: square, pixel-sized lit windows tucked
+      // just under the crest, each flickering on its own clock.
+      if (i == 1) {
+        float cells = 30.0;
+        float cell = floor(p.x * cells);
+        float occupied = step(0.68, hash21(vec2(cell, 7.0)));
+        float cx = (cell + 0.5) / cells;
+        float wy = h - 0.016 - hash21(vec2(cell, 3.0)) * 0.026;
+        vec2 q = vec2(p.x - cx, uv.y - wy);
+        float pane = step(abs(q.x), 0.0034) * step(abs(q.y), 0.0034);
+        float flicker = 0.78 + 0.22 * sin(uTime * (1.3 + hash21(vec2(cell, 9.0))) + cell * 1.7);
+        float glow = exp(-length(q * vec2(1.0, 1.4)) * 95.0) * 0.30;
+        col += lantern * (pane * 0.85 + glow) * occupied * flicker * m * hillsFade;
+      }
     }
 
     // Warm sliver of light sitting on the horizon once we arrive.
     float horizonGlow = exp(-abs(uv.y - (rise + 0.20)) * 9.0);
     col += vec3(0.24, 0.21, 0.16) * horizonGlow * hillsFade * 0.55;
+
+    // ------------------------------------------------------- lantern ------
+    // A little warm light that follows the pointer around the sky.
+    vec2 toPointer = (vUv - uPointer) * vec2(uAspect, 1.0);
+    float pointerGlow = exp(-length(toPointer) * 6.5);
+    col += vec3(0.10, 0.085, 0.11) * pointerGlow * uPointerOn;
 
     // ---------------------------------------------------------- finish ----
     float vig = smoothstep(1.25, 0.30, length((vUv - 0.5) * vec2(1.15, 1.0)));
@@ -222,16 +298,24 @@ function createMaterialConfig(): THREE.ShaderMaterialParameters {
       uProgress: { value: 0 },
       uAspect: { value: 1 },
       uParallax: { value: new THREE.Vector2() },
+      uPointer: { value: new THREE.Vector2(0.5, 0.5) },
+      uPointerOn: { value: 0 },
     },
     depthTest: false,
     depthWrite: false,
   };
 }
 
+// Only a real mouse gets the lantern; on touch it would sit stuck in the
+// middle of the screen.
+const hasHover = () =>
+  typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
 export default function SkyPainting() {
   const size = useThree((state) => state.size);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
   const [materialConfig] = useState(createMaterialConfig);
+  const [pointerEnabled] = useState(hasHover);
 
   useFrame((_, delta) => {
     const material = materialRef.current;
@@ -256,6 +340,15 @@ export default function SkyPainting() {
     const targetY = sceneInput.reducedMotion ? 0 : sceneInput.pointerY * 0.012;
     parallax.x += (targetX - parallax.x) * Math.min(1, step * 2.0);
     parallax.y += (targetY - parallax.y) * Math.min(1, step * 2.0);
+
+    // sceneInput's pointer is -1..1 with y pointing down; uv is 0..1, y up.
+    const pointer = uniforms.uPointer.value as THREE.Vector2;
+    const px = sceneInput.pointerX * 0.5 + 0.5;
+    const py = 0.5 - sceneInput.pointerY * 0.5;
+    pointer.x += (px - pointer.x) * Math.min(1, step * 5.0);
+    pointer.y += (py - pointer.y) * Math.min(1, step * 5.0);
+    const on = pointerEnabled && !sceneInput.reducedMotion ? 1 : 0;
+    uniforms.uPointerOn.value += (on - uniforms.uPointerOn.value) * Math.min(1, step * 2.0);
   });
 
   return (

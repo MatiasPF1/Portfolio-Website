@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, IBM_Plex_Sans, Press_Start_2P } from "next/font/google";
 
 import "./globals.css";
 import BackgroundScene from "@/components/BackgroundScene";
+import SkyWishes from "@/components/SkyWishes";
 
 // Display face. Fraunces' soft, slightly wonky serif carries the Ghibli half
 // of the palette in a way a neutral grotesk can't.
@@ -28,16 +29,26 @@ const pressStart = Press_Start_2P({
   variable: "--font-press-start",
 });
 
+const description =
+  "Computer science student at Stevens Institute of Technology building real-time systems, machine learning research tools and AI agents. Software engineering, research, and community building in the New York metro area.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://matiasfreire.com"),
   title: "Matias Freire | Software Engineer",
-  description:
-    "Computer science student at Stevens Institute of Technology. Software engineering, machine learning research, and community building in the New York metro area.",
+  description,
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Matias Freire | Software Engineer",
-    description:
-      "Computer science student at Stevens Institute of Technology. Software engineering, machine learning research, and community building.",
+    description,
+    url: "/",
+    siteName: "Matias Freire",
     type: "website",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#070b16",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -57,6 +68,8 @@ export default function RootLayout({
       <body className="antialiased" suppressHydrationWarning>
         {/* Rendered here rather than per-page so the scene never remounts. */}
         <BackgroundScene />
+        <div aria-hidden="true" className="shooting-star" />
+        <SkyWishes />
         <div aria-hidden="true" className="vignette" />
         <div aria-hidden="true" className="grain" />
         {children}

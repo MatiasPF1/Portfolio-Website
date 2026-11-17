@@ -9,6 +9,24 @@ npm run build   # production build
 npm run lint
 ```
 
+## Updating the content
+
+Every word on the site lives in `lib/content.ts`: profile, experience,
+leadership, skills, projects, and the About photos. To add a role or a
+project, add an entry there; the components don't need to change.
+
+A project with an `image` (a screenshot in `public/`) uses it as its cover.
+One without gets a pixel-art cover instead: set `sprite` to any sprite name
+from `components/PixelSprite.tsx`. `live` adds a "Visit site" link.
+
+## Pixel sprites
+
+The small decorations (sparkles, the heart, the footer cat, project covers)
+are drawn by `components/PixelSprite.tsx` from character grids, one character
+per pixel, coloured through a palette of theme tokens. To add one, add a grid
+to `sprites`. Their animations (`.twinkle`, `.bob`, `.snooze`, `.zzz`) step
+instead of easing, and are switched off under `prefers-reduced-motion`.
+
 ## The background scene
 
 The whole page sits on one WebGL scene that reacts to scroll: you start in deep
@@ -33,6 +51,15 @@ Notes for future edits:
   colour in the shaders is a literal display value. No tone mapping or colour
   conversion is applied. Uniform colours are `Vector3`, not `THREE.Color`, for
   the same reason.
+- **What's in the sky**, top to bottom in `SkyPainting.tsx`: a two-tone
+  nebula, an aurora (three ribbons, fullest mid-page, gone by the footer), the
+  moon with its ring, three cloud bands, then the hills painted far to near
+  with a village of flickering windows on the middle ridge. A soft lantern
+  follows a real mouse pointer (not touch).
+- **Fireflies**: `Spores.tsx` motes switch from slow breathing to green-gold
+  blinks as the hills come into view (`uBlink`).
+- **Wishes**: `components/SkyWishes.tsx` launches a shooting star from any
+  click on empty sky; clicks on links, buttons and the nav are ignored.
 - **Keep the backdrop dark.** The entire site is near-white text on top of it;
   `horizonDay` in particular is deliberately dim so the footer stays readable.
 - `prefers-reduced-motion` freezes the scene and disables the reveal

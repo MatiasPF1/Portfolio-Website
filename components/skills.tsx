@@ -1,13 +1,7 @@
+import PixelSprite from "@/components/PixelSprite";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-
-const groups = [
-  { label: "Languages", items: ["Python", "TypeScript", "Java", "C/C++", "SQL"] },
-  { label: "Web", items: ["React", "Next.js", "Tailwind CSS", "FastAPI", "Supabase"] },
-  { label: "ML & Data", items: ["PyTorch", "scikit-learn", "NumPy", "Pandas"] },
-  { label: "Systems & Data", items: ["RTI Connext DDS", "Docker", "Redis", "SQLite"] },
-  { label: "Tooling", items: ["Git", "Linux"] },
-];
+import { skillGroups } from "@/lib/content";
 
 export default function Skill_Section() {
   return (
@@ -17,26 +11,31 @@ export default function Skill_Section() {
           index="02"
           eyebrow="Skills"
           title="What I build with"
-          description="The tools I reach for across systems work, web engineering, and research."
+          description="The tools I reach for across systems work, AI and ML, and web engineering."
         />
       </Reveal>
 
       <div className="mt-7 md:mt-8">
-        {groups.map((group, index) => (
+        {skillGroups.map((group, index) => (
           <Reveal key={group.label} delay={index * 80}>
-            {/* A labelled row per group rather than a wall of identical tiles —
-                it says more with less and stays readable at any width. */}
-            <div className="grid gap-3 border-t border-white/8 py-5 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-8 md:py-6">
-              {/* leading-loose because .pixel sets line-height:1, which
-                  collapses a label that wraps onto two lines. */}
-              <h3 className="pixel pt-1 leading-loose text-paper-mute">{group.label}</h3>
-              <ul className="flex flex-wrap gap-2.5">
-                {group.items.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-full border border-white/10 bg-ink-800/50 px-4 py-2 text-sm text-paper-dim backdrop-blur-sm transition-all duration-300 ease-out-soft hover:-translate-y-0.5 hover:border-sage-400/40 hover:bg-sage-400/8 hover:text-paper"
-                  >
-                    {item}
+            {/* A labelled row per group, set as a line of type with pixel
+                stars between the words rather than a wall of boxed tags. */}
+            <div className="grid gap-3 border-t border-white/8 py-5 md:grid-cols-[11rem_minmax(0,1fr)] md:items-baseline md:gap-8 md:py-6">
+              <h3 className="pixel text-paper-mute">{group.label}</h3>
+              <ul className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                {group.items.map((item, itemIndex) => (
+                  <li key={item} className="flex items-center gap-4">
+                    {itemIndex > 0 ? (
+                      <PixelSprite
+                        name="twinkle"
+                        scale={2}
+                        className="twinkle opacity-70"
+                        style={{ animationDelay: `${-((index * 3 + itemIndex) % 7) * 0.45}s` }}
+                      />
+                    ) : null}
+                    <span className="display hop cursor-default text-xl text-paper-dim md:text-[1.4rem]">
+                      {item}
+                    </span>
                   </li>
                 ))}
               </ul>

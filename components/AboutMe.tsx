@@ -1,25 +1,12 @@
 import Image from "next/image";
 
+import PixelSprite from "@/components/PixelSprite";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
+import { about, moments, music } from "@/lib/content";
 
-const moments = [
-  { image: "/First-Gen.jpeg", caption: "First-generation Ecuadorian CS student" },
-  { image: "/STEP.jpeg", caption: "My students during the STEP 2025 Bridge Summer Program" },
-  { image: "/SHPE2025.jpeg", caption: "SHPE National Convention 2025, Philadelphia" },
-  { image: "/Hackru.jpeg", caption: "My team at HackRU 2025" },
-];
-
-const music = [
-  { image: "/Malcom.jpeg", name: "Malcolm Todd" },
-  { image: "/bruno-mars.jpg", name: "Bruno Mars" },
-  { image: "/Enanitos_verdes.jpg", name: "Enanitos Verdes" },
-  { image: "/Tame_Impala.jpg", name: "Tame Impala" },
-  { image: "/Grent.jpeg", name: "grentperez" },
-  { image: "/Jane_Remover.jpg", name: "Jane Remover" },
-  { image: "/Laufey1.jpg", name: "Laufey" },
-  { image: "/TheMarias.jpg", name: "The Marías" },
-];
+// Each photo leans a different way when you point at it, like nudging a print.
+const nudge = ["hover:-rotate-2", "hover:rotate-2", "hover:-rotate-1", "hover:rotate-1"];
 
 export default function About_Me() {
   return (
@@ -30,23 +17,15 @@ export default function About_Me() {
 
       <Reveal delay={60}>
         <div className="mt-6 grid gap-6 md:mt-7 md:grid-cols-2 md:gap-10">
-          <p className="text-base leading-relaxed text-paper-dim">
-            I&apos;m a first-generation Ecuadorian computer science student at
-            Stevens. I like working where software meets something physical, like
-            real-time telemetry streaming off a locomotive and microscopy images
-            of two-dimensional materials.
-          </p>
-          <p className="text-base leading-relaxed text-paper-mute">
-            Most of my time outside class goes to the communities that got me
-            here: leading ColorStack and SHPE on campus, building their sites,
-            and mentoring incoming students through STEP Bridge.
-          </p>
+          <p className="text-base leading-relaxed text-paper-dim">{about.lead}</p>
+          <p className="text-base leading-relaxed text-paper-mute">{about.body}</p>
         </div>
       </Reveal>
 
       {/* ------------------------------------------------------- photos -- */}
       <Reveal delay={80}>
-        <h3 className="pixel mt-9 border-t border-white/8 pt-5 text-paper-mute md:mt-10">
+        <h3 className="pixel mt-9 flex items-center gap-2.5 border-t border-white/8 pt-5 text-paper-mute md:mt-10">
+          <PixelSprite name="twinkle" scale={2} className="twinkle" />
           Moments
         </h3>
       </Reveal>
@@ -55,7 +34,9 @@ export default function About_Me() {
         {moments.map((moment, index) => (
           <Reveal key={moment.image} delay={index * 90} as="article">
             <figure className="group">
-              <div className="relative aspect-square overflow-hidden rounded-xl border border-white/8 bg-ink-800/40">
+              <div
+                className={`relative aspect-square overflow-hidden rounded-xl border border-white/8 bg-ink-800/40 transition-transform duration-500 ease-out-soft hover:-translate-y-1 ${nudge[index % nudge.length]}`}
+              >
                 <Image
                   src={moment.image}
                   alt={moment.caption}
@@ -78,7 +59,8 @@ export default function About_Me() {
 
       {/* -------------------------------------------------------- music -- */}
       <Reveal>
-        <h3 className="pixel mt-9 border-t border-white/8 pt-5 text-paper-mute md:mt-10">
+        <h3 className="pixel mt-9 flex items-center gap-2.5 border-t border-white/8 pt-5 text-paper-mute md:mt-10">
+          <PixelSprite name="heart" scale={2} className="bob" />
           Fav Artists
         </h3>
       </Reveal>
@@ -87,7 +69,9 @@ export default function About_Me() {
         {music.map((artist, index) => (
           <Reveal key={artist.image} delay={(index % 4) * 80} as="article">
             <figure className="group">
-              <div className="relative aspect-square overflow-hidden rounded-xl border border-white/8 bg-ink-800/40">
+              <div
+                className={`relative aspect-square overflow-hidden rounded-xl border border-white/8 bg-ink-800/40 transition-transform duration-500 ease-out-soft hover:-translate-y-1 ${nudge[(index + 1) % nudge.length]}`}
+              >
                 <Image
                   src={artist.image}
                   alt={artist.name}

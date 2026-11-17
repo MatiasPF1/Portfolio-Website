@@ -1,6 +1,7 @@
 "use client";
 
 import Shuffle from "@/Reactbits_Components/Shuffletext";
+import PixelSprite from "@/components/PixelSprite";
 
 type SectionHeadingProps = {
   /** Two-digit section index, e.g. "02". */
@@ -44,6 +45,7 @@ export default function SectionHeading({
           stagger={0.02}
           textAlign="left"
         />
+        <PixelSprite name="sparkle" scale={2} className="twinkle" />
       </div>
 
       <h2 className="display mt-4 text-[2.1rem] leading-[1.05] text-paper sm:text-5xl md:text-[3.4rem]">

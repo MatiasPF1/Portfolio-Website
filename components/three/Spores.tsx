@@ -10,6 +10,9 @@ import { sceneInput } from "@/lib/sceneInput";
  * The warm drifting motes — the Ghibli half of the scene. They sit close to
  * the camera so they parallax hard against the sky, and they're few and dim
  * on purpose: this should read as air, not as a particle effect.
+ *
+ * Down by the hills they turn into fireflies: the slow breathing sharpens
+ * into on/off blinks and the colour shifts toward green-gold.
  */
 
 const COUNT_HIGH = 130;
@@ -25,8 +28,10 @@ const vertexShader = /* glsl */ `
   uniform float uTime;
   uniform float uPixelRatio;
   uniform float uSpanY;
+  uniform float uBlink;
 
   varying float vAlpha;
+  varying float vFirefly;
 
   void main() {
     vec3 pos = position;
@@ -41,7 +46,12 @@ const vertexShader = /* glsl */ `
 
     // Fade at the top and bottom of the wrap band so nothing pops in.
     float edge = 1.0 - smoothstep(uSpanY * 0.30, uSpanY * 0.5, abs(pos.y));
-    vAlpha = edge * (0.35 + 0.65 * (0.5 + 0.5 * sin(uTime * 0.5 + aSeed.z * 6.2831)));
+    float breathe = 0.35 + 0.65 * (0.5 + 0.5 * sin(uTime * 0.5 + aSeed.z * 6.2831));
+    // Firefly blink: mostly dark, with a short bright flash on its own beat.
+    float beat = fract(uTime * (0.16 + aSeed.x * 0.22) + aSeed.z);
+    float flash = smoothstep(0.0, 0.06, beat) * (1.0 - smoothstep(0.10, 0.30, beat));
+    vAlpha = edge * mix(breathe, 0.12 + flash * 2.2, uBlink);
+    vFirefly = uBlink * step(0.45, fract(aSeed.z * 7.13));
 
     gl_PointSize = aSize * uPixelRatio * (26.0 / max(0.001, -mv.z));
   }
@@ -51,9 +61,11 @@ const fragmentShader = /* glsl */ `
   precision mediump float;
 
   uniform vec3 uColor;
+  uniform vec3 uFireflyColor;
   uniform float uOpacity;
 
   varying float vAlpha;
+  varying float vFirefly;
 
   void main() {
     float d = length(gl_PointCoord - 0.5);
@@ -61,7 +73,7 @@ const fragmentShader = /* glsl */ `
     float core = smoothstep(0.5, 0.0, d);
     float alpha = core * core * vAlpha * uOpacity;
     if (alpha < 0.004) discard;
-    gl_FragColor = vec4(uColor, alpha);
+    gl_FragColor = vec4(mix(uColor, uFireflyColor, vFirefly), alpha);
   }
 `;
 
@@ -97,8 +109,10 @@ function createMaterialConfig(): THREE.ShaderMaterialParameters {
       uPixelRatio: { value: 1 },
       uSpanY: { value: SPAN_Y },
       uOpacity: { value: 0.5 },
+      uBlink: { value: 0 },
       // See Starfield — literal output values, deliberately not a THREE.Color.
       uColor: { value: new THREE.Vector3(0.941, 0.863, 0.706) },
+      uFireflyColor: { value: new THREE.Vector3(0.78, 0.95, 0.55) },
     },
     transparent: true,
     depthWrite: false,
@@ -126,6 +140,8 @@ export default function Spores() {
     }
     // Present throughout, but thicker once there's atmosphere to carry them.
     uniforms.uOpacity.value = 0.34 + 0.42 * sceneInput.scrollEased;
+    // Fireflies come out once the hills are in view.
+    uniforms.uBlink.value = smoothstep(0.45, 0.85, sceneInput.scrollEased);
   });
 
   return (
@@ -138,4 +154,9 @@ export default function Spores() {
       <shaderMaterial ref={materialRef} args={[materialConfig]} />
     </points>
   );
+}
+
+function smoothstep(edge0: number, edge1: number, x: number) {
+  const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)));
+  return t * t * (3 - 2 * t);
 }
