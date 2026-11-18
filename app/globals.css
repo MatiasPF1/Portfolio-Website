@@ -407,6 +407,115 @@ body {
   color: var(--color-lantern-300);
 }
 
+/* ============================================================
+   Animals
+   ============================================================ */
+
+/* Two-frame sprites (AnimatedSprite.tsx). Frame B is hidden by default, so
+   with no animation the resting frame shows. */
+.frame-b {
+  opacity: 0;
+}
+.sprite-blink .frame-a,
+.sprite-blink .frame-b,
+.sprite-flap .frame-a,
+.sprite-flap .frame-b {
+  animation-duration: var(--sprite-duration, 4s);
+  animation-delay: var(--sprite-delay, 0s);
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(1, end);
+}
+.sprite-blink .frame-a {
+  animation-name: blink-a;
+}
+.sprite-blink .frame-b {
+  animation-name: blink-b;
+}
+.sprite-flap .frame-a {
+  animation-name: flap-a;
+}
+.sprite-flap .frame-b {
+  animation-name: flap-b;
+}
+@keyframes blink-a {
+  0% { opacity: 1; }
+  93% { opacity: 0; }
+  97% { opacity: 1; }
+  100% { opacity: 1; }
+}
+@keyframes blink-b {
+  0% { opacity: 0; }
+  93% { opacity: 1; }
+  97% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes flap-a {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes flap-b {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* The sky whale crosses left to right over about a minute, then stays out
+   of frame for a while before coming round again. */
+.sky-whale {
+  translate: -140px 0;
+  animation: whale-swim 95s linear infinite;
+  animation-delay: -18s;
+}
+@keyframes whale-swim {
+  0% { translate: -140px 0; }
+  62% { translate: calc(100vw + 40px) -6vh; }
+  100% { translate: calc(100vw + 40px) -6vh; }
+}
+.whale-bob {
+  animation: whale-bob 5s ease-in-out infinite;
+}
+@keyframes whale-bob {
+  0%, 100% { translate: 0 0; rotate: -2deg; }
+  50% { translate: 0 10px; rotate: 2deg; }
+}
+
+/* The flock flies the other way, faster, on its own clock. */
+.sky-birds {
+  translate: calc(100vw + 20px) 0;
+  animation: birds-fly 42s linear infinite;
+  animation-delay: 6s;
+}
+@keyframes birds-fly {
+  0% { translate: calc(100vw + 20px) 0; }
+  45% { translate: -120px 4vh; }
+  100% { translate: -120px 4vh; }
+}
+
+/* The condor rides the air above the footer, drifting back and forth. */
+.condor-soar {
+  animation: condor-soar 24s ease-in-out infinite alternate;
+}
+@keyframes condor-soar {
+  0% { translate: 0 0; }
+  25% { translate: 14vw -10px; }
+  50% { translate: 26vw 4px; }
+  75% { translate: 34vw -8px; }
+  100% { translate: 40vw 0; }
+}
+
+/* Music notes drift up from the frog, one after another. */
+.note-float {
+  opacity: 0;
+  animation: note-float 3.2s steps(8, end) infinite;
+  animation-delay: var(--note-delay, 0s);
+}
+@keyframes note-float {
+  0% { opacity: 0; translate: 0 0; }
+  15% { opacity: 1; }
+  100% { opacity: 0; translate: 10px -26px; }
+}
+
 /* The global reduced-motion rule shortens animations to a single instant
    pass, which would strand the looping ones mid-frame; switch them off. */
 @media (prefers-reduced-motion: reduce) {
@@ -414,8 +523,25 @@ body {
   .bob,
   .snooze,
   .zzz,
-  .shooting-star {
+  .shooting-star,
+  .frame-a,
+  .frame-b,
+  .whale-bob,
+  .condor-soar,
+  .note-float {
     animation: none !important;
+  }
+  .frame-b {
+    opacity: 0 !important;
+  }
+  .note-float {
+    opacity: 0.8;
+  }
+  /* The sky animals only make sense moving; without motion they'd hang
+     frozen behind the text, so they leave. */
+  .sky-whale,
+  .sky-birds {
+    display: none;
   }
   .zzz {
     opacity: 0.8;

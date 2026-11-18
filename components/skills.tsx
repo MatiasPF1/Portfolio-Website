@@ -1,3 +1,4 @@
+import AnimatedSprite from "@/components/AnimatedSprite";
 import PixelSprite from "@/components/PixelSprite";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -15,7 +16,16 @@ export default function Skill_Section() {
         />
       </Reveal>
 
-      <div className="mt-7 md:mt-8">
+      <div className="relative mt-7 md:mt-8">
+        {/* A bunny sitting on the first divider line. */}
+        <AnimatedSprite
+          frames={["bunny", "bunnyFlop"]}
+          mode="blink"
+          scale={3}
+          duration={3.6}
+          delay={-1.2}
+          className="absolute -top-[27px] right-4"
+        />
         {skillGroups.map((group, index) => (
           <Reveal key={group.label} delay={index * 80}>
             {/* A labelled row per group, set as a line of type with pixel

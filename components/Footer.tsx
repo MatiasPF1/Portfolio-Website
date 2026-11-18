@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
+import AnimatedSprite from "@/components/AnimatedSprite";
 import PixelSprite from "@/components/PixelSprite";
 import Reveal from "@/components/Reveal";
 import { profile } from "@/lib/content";
@@ -9,9 +10,16 @@ export default function Footer() {
   return (
     <footer className="mx-auto w-full max-w-5xl px-6 pb-10 pt-12 md:pb-14">
       <Reveal>
-        {/* The cat naps on the divider line itself: its box ends exactly where
-            the border begins. */}
-        <div aria-hidden="true" className="flex justify-end pr-6 md:pr-10">
+        {/* An Andean night on the divider line: a condor riding the air
+            above, a llama in a woven blanket, and the cat asleep. Every
+            animal's box ends exactly where the border begins. */}
+        <div aria-hidden="true" className="relative flex items-end justify-between px-4 md:px-10">
+          <div className="condor-soar absolute -top-16 left-[18%]">
+            <AnimatedSprite frames={["condorGlide", "condorFlap"]} mode="blink" scale={3} duration={3.2} />
+          </div>
+
+          <AnimatedSprite frames={["llama", "llamaChew"]} mode="blink" scale={3} duration={2.6} delay={-0.8} />
+
           <div className="relative">
             <span className="pixel zzz absolute -top-3 right-9 text-peri-300">z</span>
             <span
@@ -72,8 +80,12 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-2 text-[0.75rem] text-paper-dim md:flex-row md:justify-between">
-          <p>
+          <p className="flex items-center gap-2.5">
             © {new Date().getFullYear()} {profile.name}
+            <span title="Ecuador" className="inline-flex">
+              <PixelSprite name="flag" scale={2} />
+              <span className="sr-only">, from Ecuador</span>
+            </span>
           </p>
           <p className="flex items-center gap-2">
             Built with

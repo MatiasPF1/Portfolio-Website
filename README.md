@@ -27,6 +27,19 @@ per pixel, coloured through a palette of theme tokens. To add one, add a grid
 to `sprites`. Their animations (`.twinkle`, `.bob`, `.snooze`, `.zzz`) step
 instead of easing, and are switched off under `prefers-reduced-motion`.
 
+## Animals
+
+Two-frame animals use `components/AnimatedSprite.tsx` (`blink` for eyes and
+ears, `flap` for wings). Where they live:
+
+| Animal | File |
+| --- | --- |
+| Owl on the portrait | `Hero_Section_Image.tsx` |
+| Bunny on the skills list | `skills.tsx` |
+| Frog with music notes | `AboutMe.tsx` |
+| Sky whale, bird flock | `SkyCritters.tsx` (hidden under reduced motion) |
+| Condor, llama, sleeping cat | `Footer.tsx` |
+
 ## The background scene
 
 The whole page sits on one WebGL scene that reacts to scroll: you start in deep
@@ -60,6 +73,9 @@ Notes for future edits:
   blinks as the hills come into view (`uBlink`).
 - **Wishes**: `components/SkyWishes.tsx` launches a shooting star from any
   click on empty sky; clicks on links, buttons and the nav are ignored.
+- **The Andes**: near the bottom, two snow-capped volcanoes (a Cotopaxi-like
+  cone with a smoke plume, and a lower Chimborazo) stand behind the hills,
+  lit from the moon's side.
 - **Keep the backdrop dark.** The entire site is near-white text on top of it;
   `horizonDay` in particular is deliberately dim so the footer stays readable.
 - `prefers-reduced-motion` freezes the scene and disables the reveal

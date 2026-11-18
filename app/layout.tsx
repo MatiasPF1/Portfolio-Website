@@ -3,6 +3,7 @@ import { Fraunces, IBM_Plex_Sans, Press_Start_2P } from "next/font/google";
 
 import "./globals.css";
 import BackgroundScene from "@/components/BackgroundScene";
+import SkyCritters from "@/components/SkyCritters";
 import SkyWishes from "@/components/SkyWishes";
 
 // Display face. Fraunces' soft, slightly wonky serif carries the Ghibli half
@@ -69,6 +70,7 @@ export default function RootLayout({
         {/* Rendered here rather than per-page so the scene never remounts. */}
         <BackgroundScene />
         <div aria-hidden="true" className="shooting-star" />
+        <SkyCritters />
         <SkyWishes />
         <div aria-hidden="true" className="vignette" />
         <div aria-hidden="true" className="grain" />

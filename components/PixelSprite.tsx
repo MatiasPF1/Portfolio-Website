@@ -2,8 +2,8 @@
  * Tiny pixel-art sprites, drawn as SVG rects from character grids.
  *
  * They are the companion to the Press Start 2P labels: the same chunky grid,
- * used for the small decorative things (sparkles, the footer cat, cover art
- * for projects that have no screenshot). Each character in a row is one
+ * used for the small decorative things (sparkles, the animals that live
+ * around the page, cover art for projects that have no screenshot). Each character in a row is one
  * pixel; "." is empty and every other character is looked up in the palette.
  */
 
@@ -19,6 +19,11 @@ const palette: Record<string, string> = {
   h: "var(--color-blush-400)",
   n: "var(--color-blush-300)",
   k: "var(--color-ink-800)",
+  c: "var(--color-peri-300)",
+  // Ecuadorian flag, softened to sit in the night palette.
+  y: "#f2cc5b",
+  b: "#4a6bc4",
+  r: "#d65a63",
 };
 
 const sprites = {
@@ -92,6 +97,173 @@ const sprites = {
     "...dgsgd...",
     "....dsd....",
     ".....d.....",
+  ],
+
+  // ------------------------------------------------------------ animals --
+  // Two-frame animals come in pairs; AnimatedSprite flips between them.
+
+  // Perched on the portrait. Lantern eyes, a speckled chest.
+  owl: [
+    "q.........q",
+    "qq.......qq",
+    "qpppppppppq",
+    "plllppplllp",
+    "plklppplklp",
+    "plllpmplllp",
+    ".ppcpcpcpp.",
+    ".pcpcpcpcp.",
+    ".ppcpcpcpp.",
+    "..ppppppp..",
+    "..mm...mm..",
+  ],
+  owlBlink: [
+    "q.........q",
+    "qq.......qq",
+    "qpppppppppq",
+    "ppppppppppp",
+    "pqqqpppqqqp",
+    "pppppmppppp",
+    ".ppcpcpcpp.",
+    ".pcpcpcpcp.",
+    ".ppcpcpcpp.",
+    "..ppppppp..",
+    "..mm...mm..",
+  ],
+
+  // Sits on the skills list and flicks an ear now and then.
+  bunny: [
+    ".ww...ww.",
+    ".wn...nw.",
+    ".wn...nw.",
+    "..wwwww..",
+    ".wkwwwkw.",
+    ".whwnwhw.",
+    "..wwwww..",
+    ".wwwwwww.",
+    ".ww.w.ww.",
+  ],
+  bunnyFlop: [
+    ".ww......",
+    ".wn...www",
+    ".wn......",
+    "..wwwww..",
+    ".wkwwwkw.",
+    ".whwnwhw.",
+    "..wwwww..",
+    ".wwwwwww.",
+    ".ww.w.ww.",
+  ],
+
+  // Listens to the music section.
+  frog: [
+    ".ggg.ggg.",
+    ".gkg.gkg.",
+    "ggggggggg",
+    "ghgggggh.",
+    ".gdddddg.",
+    "ggsssssgg",
+    "gg.....gg",
+  ],
+  frogBlink: [
+    ".ggg.ggg.",
+    ".gdg.gdg.",
+    "ggggggggg",
+    "ghgggggh.",
+    ".gdddddg.",
+    "ggsssssgg",
+    "gg.....gg",
+  ],
+  note: [
+    "..ll.",
+    "..l.l",
+    "..l..",
+    "..l..",
+    "lll..",
+    "lll..",
+  ],
+
+  // Swims across the sky, Ghibli style. Faces right, the way it travels.
+  whale: [
+    "..............c.c.....",
+    ".............c.c.c....",
+    "...............c......",
+    "qq......pppppppp......",
+    ".qq...pppppppppppp....",
+    "..qq.pppppppppppppp...",
+    "...qppppppppppppppkpp.",
+    "..qqppppppppppppppphpp",
+    ".qq..pcccccccccccccpp.",
+    "qq....ccccccccccccc...",
+    ".......ccccccccccc....",
+  ],
+
+  birdUp: [
+    "c.....c",
+    ".c...c.",
+    "..ccc..",
+    "...c...",
+  ],
+  birdDown: [
+    ".......",
+    "..ccc..",
+    ".c.c.c.",
+    "c.....c",
+  ],
+
+  // ------------------------------------------------------------ ecuador --
+  // A llama in a woven Andean blanket, facing right.
+  llama: [
+    "......w.w.",
+    "......wwww",
+    "......wwkw",
+    "......wwww",
+    "......ww..",
+    "......ww..",
+    "ww....ww..",
+    "wwwwwwww..",
+    "wrylbryw..",
+    "wwwwwwww..",
+    ".w.w.w.w..",
+    ".w.w.w.w..",
+  ],
+  llamaChew: [
+    "......ww..",
+    "......wwww",
+    "......wwkw",
+    "......wwwh",
+    "......ww..",
+    "......ww..",
+    "ww....ww..",
+    "wwwwwwww..",
+    "wrylbryw..",
+    "wwwwwwww..",
+    ".w.w.w.w..",
+    ".w.w.w.w..",
+  ],
+
+  // Andean condor: dark wings, white collar.
+  condorGlide: [
+    "......w......",
+    "qqqqqqwqqqqqq",
+    "..qqqwwwqqq..",
+    ".....q.q.....",
+  ],
+  condorFlap: [
+    "qq.........qq",
+    "..qq..w..qq..",
+    "....qqwqq....",
+    ".....q.q.....",
+  ],
+
+  flag: [
+    "yyyyyyyyyyyy",
+    "yyyyyyyyyyyy",
+    "yyyyymmyyyyy",
+    "yyyyymmyyyyy",
+    "bbbbbmmbbbbb",
+    "bbbbbbbbbbbb",
+    "rrrrrrrrrrrr",
+    "rrrrrrrrrrrr",
   ],
 } satisfies Record<string, string[]>;
 

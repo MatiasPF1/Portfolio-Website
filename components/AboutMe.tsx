@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import AnimatedSprite from "@/components/AnimatedSprite";
 import PixelSprite from "@/components/PixelSprite";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
@@ -59,9 +60,24 @@ export default function About_Me() {
 
       {/* -------------------------------------------------------- music -- */}
       <Reveal>
-        <h3 className="pixel mt-9 flex items-center gap-2.5 border-t border-white/8 pt-5 text-paper-mute md:mt-10">
+        <h3 className="pixel relative mt-9 flex items-center gap-2.5 border-t border-white/8 pt-5 text-paper-mute md:mt-10">
           <PixelSprite name="heart" scale={2} className="bob" />
           Fav Artists
+          {/* A frog sitting on the divider, listening along. */}
+          <span aria-hidden="true" className="absolute -top-[21px] right-4">
+            <PixelSprite
+              name="note"
+              scale={2}
+              className="note-float absolute -top-4 left-1"
+            />
+            <PixelSprite
+              name="note"
+              scale={2}
+              className="note-float absolute -top-5 left-5"
+              style={{ ["--note-delay" as string]: "-1.6s" }}
+            />
+            <AnimatedSprite frames={["frog", "frogBlink"]} mode="blink" scale={3} duration={5} delay={-2.5} />
+          </span>
         </h3>
       </Reveal>
 

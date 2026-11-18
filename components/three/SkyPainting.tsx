@@ -8,8 +8,8 @@ import { sceneInput } from "@/lib/sceneInput";
 
 /**
  * The backdrop is a single full-screen fragment shader rather than a stack of
- * meshes: sky gradient, aurora, cloud banks, moon, hills and the village on
- * them all share the same noise field, which is both cheaper and easier to
+ * meshes: sky gradient, aurora, cloud banks, moon, the Andes, hills and the
+ * village on them all share the same noise field, which is both cheaper and easier to
  * keep tonally consistent than compositing separate textured planes.
  *
  * Everything is tuned to stay in the lower quarter of the luminance range —
@@ -116,6 +116,17 @@ const fragmentShader = /* glsl */ `
       acc += tint * curtain * rays * patchy * (0.60 - fi * 0.15);
     }
     return acc;
+  }
+
+  // ------------------------------------------------------------ volcanoes --
+  // Andean stratovolcano profile: steep near the summit, flaring at the base,
+  // with the top shaved flat into a crater. Returns height above its base.
+  float volcano(float x, float cx, float halfW, float height, float crater) {
+    float t = max(0.0, 1.0 - abs(x - cx) / halfW);
+    float prof = min(pow(t, 1.35), 1.0 - crater);
+    // A little roughness on the flanks so the silhouette isn't a ruler line.
+    prof += (valueNoise(vec2(x * 42.0, cx * 9.0)) - 0.5) * 0.02 * t;
+    return prof * height;
   }
 
   // ---------------------------------------------------------------- hills --
@@ -230,6 +241,47 @@ const fragmentShader = /* glsl */ `
     float rise = -0.34 + 0.54 * prog;
     vec3 lantern = vec3(1.00, 0.80, 0.50);
 
+    // ------------------------------------------------------- volcanoes ----
+    // An Ecuadorian skyline behind the hills: a big, near-perfect cone like
+    // Cotopaxi, still breathing a thread of smoke, and a lower, rounder peak
+    // like Chimborazo. Both snow-capped and lit from the moon's side.
+    float vBase = rise + 0.13;
+    float cotoX = 0.64 * uAspect;
+    float chimX = 0.17 * uAspect;
+    float cotoH = 0.22;
+    float chimH = 0.13;
+
+    float hCoto = vBase + volcano(p.x, cotoX, 0.44, cotoH, 0.05);
+    float hChim = vBase - 0.01 + volcano(p.x, chimX, 0.34, chimH, 0.14);
+
+    float inCoto = smoothstep(hCoto + 0.002, hCoto - 0.002, uv.y);
+    float inChim = smoothstep(hChim + 0.002, hChim - 0.002, uv.y);
+    float inVolcano = max(inCoto, inChim);
+
+    // Lit flank faces the moon (upper left of each cone), the other in shade.
+    float nearX = inCoto > inChim ? cotoX : chimX;
+    float litSide = smoothstep(-0.03, 0.03, nearX - p.x);
+    vec3 rock = mix(vec3(0.040, 0.050, 0.088), vec3(0.074, 0.090, 0.142), litSide);
+    col = mix(col, rock, inVolcano * hillsFade);
+
+    // Snow caps with ragged glacier tongues reaching down the flanks.
+    float relCoto = (uv.y - vBase) / cotoH;
+    float relChim = (uv.y - vBase + 0.01) / chimH;
+    float snowCoto = inCoto * step(0.66 + 0.16 * valueNoise(vec2(p.x * 36.0, 3.0)), relCoto);
+    float snowChim = inChim * (1.0 - inCoto) * step(0.70 + 0.14 * valueNoise(vec2(p.x * 30.0, 8.0)), relChim);
+    vec3 snow = mix(vec3(0.27, 0.31, 0.43), vec3(0.62, 0.67, 0.80), litSide);
+    col = mix(col, snow, max(snowCoto, snowChim) * hillsFade);
+
+    // Cotopaxi's plume: a soft wisp leaning downwind as it rises.
+    vec2 pq = vec2(p.x - cotoX, uv.y - (vBase + cotoH * 0.95));
+    if (pq.y > 0.0) {
+      float lean = pq.y * 1.5;
+      float width = 0.012 + pq.y * 0.32;
+      float body = exp(-pow((pq.x - lean) / width, 2.0)) * exp(-pq.y * 7.0);
+      float puff = fbm(vec2(pq.x * 10.0 - uTime * 0.04, pq.y * 10.0 - uTime * 0.07));
+      col += vec3(0.26, 0.29, 0.38) * body * smoothstep(0.3, 0.8, puff) * 0.7 * hillsFade;
+    }
+
     for (int i = 0; i < 3; i++) {
       float fi = 2.0 - float(i);
       float seed = 1.0 + fi * 2.0;
@@ -261,9 +313,9 @@ const fragmentShader = /* glsl */ `
       }
     }
 
-    // Warm sliver of light sitting on the horizon once we arrive.
+    // Silver sliver of moonlight sitting on the horizon once we arrive.
     float horizonGlow = exp(-abs(uv.y - (rise + 0.20)) * 9.0);
-    col += vec3(0.24, 0.21, 0.16) * horizonGlow * hillsFade * 0.55;
+    col += vec3(0.15, 0.18, 0.27) * horizonGlow * hillsFade * 0.55;
 
     // ------------------------------------------------------- lantern ------
     // A little warm light that follows the pointer around the sky.

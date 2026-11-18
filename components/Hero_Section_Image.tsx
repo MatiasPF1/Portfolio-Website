@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import AnimatedSprite from "@/components/AnimatedSprite";
 import PixelSprite from "@/components/PixelSprite";
 
 /**
@@ -36,8 +37,15 @@ export default function Hero_Section() {
         </div>
       </div>
 
-      {/* A sticker on the corner of the print. */}
+      {/* A sticker on the corner of the print, and an owl perched on its
+          top edge. The owl's feet sit exactly on the frame. */}
       <PixelSprite name="sparkle" scale={4} className="twinkle absolute -left-4 -top-4" />
+      <AnimatedSprite
+        frames={["owl", "owlBlink"]}
+        mode="blink"
+        scale={4}
+        className="absolute -top-11 right-8"
+      />
     </figure>
   );
 }
